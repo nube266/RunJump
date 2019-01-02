@@ -22,19 +22,19 @@ public class MobManager : MonoBehaviour {
     //---------------------移動開始判定(先頭)---------------------//
     [Header("移動するかどうかのフラグ")]
     [SerializeField] private bool moveEnable = false;  // 移動するオブジェクトならばtrue,そうでないならばfalse
-    private bool MoveStartFlag = false;  // 動き出すまではfalse、動き出したあとはfalse
+    private bool moveStartFlag = false;  // 動き出すまではfalse、動き出したあとはfalse
     private void OnBecameVisible() {  // カメラ内に入ったら動き出す
         if(moveEnable == true && this.gameObject != null) {  // 移動するオブジェクトならば
-            MoveStartFlag = true;
+            moveStartFlag = true;
         }
     }
     //---------------------移動開始判定(末尾)---------------------//
 
     //---------------------死亡判定(先頭)---------------------//
     [Header("体力(攻撃を耐える回数)")]
-    [SerializeField] private int Hp = 1;  // 攻撃を耐える回数
+    [SerializeField] private int hp = 1;  // 攻撃を耐える回数
     private void HpUpdata() {
-        if(Hp <= 0) {
+        if(hp <= 0) {
             Destroy(this.gameObject);  // 体力が0以下になったら消滅
         }
     }
@@ -46,7 +46,7 @@ public class MobManager : MonoBehaviour {
     [Header("移動方向(チェックを入れると右、入れていない場合左)")]
     [SerializeField] private bool moveDirection = false;  // 移動方向(チェックを入れると右、入れていない場合左)
     private void MoveUpdata() {
-        if(MoveStartFlag == true) {
+        if(moveStartFlag == true) {
             if(moveDirection == true) {
                 this.transform.Translate(new Vector2 (moveSpeed, 0));
             }
@@ -68,7 +68,7 @@ public class MobManager : MonoBehaviour {
 
     //---------------------HPの変動(先頭)---------------------//
     public void ChangeHp(int damage) {
-        Hp -= damage;
+        hp -= damage;
     }
     //---------------------HPの変動(末尾)---------------------//
 }
