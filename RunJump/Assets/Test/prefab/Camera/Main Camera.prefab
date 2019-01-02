@@ -99,3 +99,4 @@ MonoBehaviour:
   offsetY: -5
   offsetZ: -5
   offsetX: 10
+  moveSpeed: 0.2

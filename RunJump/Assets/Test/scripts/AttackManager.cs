@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour {
     [Header("射出する弾のプレハブ")]
-    [SerializeField] private GameObject bulletPrefab;  //射出する弾のプレハブ
+    [SerializeField] private GameObject bulletPrefab = null;  //射出する弾のプレハブ
     [Header("弾の発生場所のオフセット(X方向)")]
     [SerializeField] private float offsetX = 1.0f;  // 弾の発生場所のオフセット(X方向)
     [Header("弾の発生場所のオフセット(Y方向)")]

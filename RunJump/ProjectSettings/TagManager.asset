@@ -7,6 +7,7 @@ TagManager:
   - Undefined
   - GroundObject
   - GoalLine
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Enemy
   - 
   - 
   - 

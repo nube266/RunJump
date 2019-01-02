@@ -1,6 +1,5 @@
-﻿// 作成者:三明
-// 概要：プレイヤーの基本動作
-// 機能:ジャンプ，接地判定，重力処理，ボス戦到達判定，横移動，ジャンプ処理
+﻿// 概要：プレイヤーの基本動作
+// 機能:ジャンプ，接地判定，重力処理，ボス戦到達判定，横移動，ジャンプ処理、画面外に出た場合の死亡判定
 
 using System.Collections;
 using System.Collections.Generic;
@@ -9,10 +8,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     private Rigidbody2D body;           // このスクリプトが適用されているRigidbody
+    private GameObject cameraObject;          // カメラのゲームオブジェクト
 
     private void Awake() {
         body = GetComponent<Rigidbody2D> ();
         this.NotBossStart(); // ボス戦の判定
+        cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     private void Update() {
@@ -40,6 +41,7 @@ public class PlayerManager : MonoBehaviour {
             moveRightEnable = true;
         }
         else {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>().CameraStop();
             moveRightEnable = false;
         }
     }
@@ -47,7 +49,7 @@ public class PlayerManager : MonoBehaviour {
 
     //---------------------Ray処理(先頭)---------------------//
     [Header("Rayと衝突するマスク")]
-    [SerializeField] private LayerMask rayLayerMask;  //Rayと衝突するマスク
+    [SerializeField] private LayerMask rayLayerMask = 0;  //Rayと衝突するマスク
     [Header("右方向へのRayの長さ")]
     [SerializeField] private float rightRayDistance = 1.0f;
     private void RayUpadata() {
@@ -60,8 +62,7 @@ public class PlayerManager : MonoBehaviour {
     }
     //---------------------Ray処理(末尾)---------------------//
 
-
-    /////////////////////接地状態の判定(先頭)/////////////////////
+    //---------------------接地状態の判定(先頭)---------------------//
     [Header("ジャンプ中かどうか判定するための閾値(小さいほど判定が甘くなる)")]
     [SerializeField] private float jumpThreshold = 100f;    // ジャンプ中か判定するための閾値
     private bool isGround = false;      //接地判定フラグ
@@ -71,9 +72,26 @@ public class PlayerManager : MonoBehaviour {
             isGround = false;
         }
     }
-    /////////////////////接地状態の判定(末尾)/////////////////////
+    //---------------------接地状態の判定(末尾)---------------------//
 
-    /////////////////////ジャンプ入力の受付(先頭)/////////////////////
+    //---------------------画面外に出た場合の死亡判定(先頭)---------------------//
+    private void OnBecameInvisible() {  // 画面外に出た場合死亡
+        if(this.gameObject != null) {
+            this.DiedProcess();
+        }
+    }
+    //---------------------画面外に出た場合の死亡判定(末尾)---------------------//
+
+    //---------------------死亡処理(先頭)---------------------//
+    private void DiedProcess() {  // 画面外に出た場合死亡
+        if(cameraObject != null) {  //カメラがあるならばカメラを停止
+            cameraObject.GetComponent<CameraManager>().CameraStop();
+        }
+        Destroy(this.gameObject);
+    }
+    //---------------------死亡処理(末尾)---------------------//
+
+    //---------------------ジャンプ入力の受付(先頭)---------------------//
     [Header("ジャンプする高さ")]
     [SerializeField] private float jumpForce = 2000f;    // ジャンプする高さ
     [Header("ジャンプする高さ(初動)")]
@@ -87,16 +105,9 @@ public class PlayerManager : MonoBehaviour {
             }
         }
     }
-    /////////////////////ジャンプ入力の受付(末尾)/////////////////////
+    //---------------------ジャンプ入力の受付(末尾)---------------------//
 
-
-    /////////////////////着地判定(先頭)/////////////////////
-    private void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.tag == "GroundObject") {
-            if (!isGround)
-                isGround = true;
-        }
-    }
+    //---------------------着地判定(先頭)---------------------//
     private void OnCollisionStay2D(Collision2D col){
         if (col.gameObject.tag == "GroundObject") {
             if(!isGround)
@@ -104,19 +115,19 @@ public class PlayerManager : MonoBehaviour {
                 this.transform.position = new Vector3 (this.transform.position.x , this.transform.position.y + 0.0001f, transform.position.z);
         }
     }
-    /////////////////////着地判定(末尾)/////////////////////
+    //---------------------着地判定(末尾)---------------------//
 
-    /////////////////////重力処理(先頭)/////////////////////
+    //---------------------重力処理(先頭)---------------------//
     [Header("重力の強さ")]
     [SerializeField] private float grabityForce = 10f;    //重力の強さ
     private void GrabityUpdata() {
         body.AddForce (Vector3.down * grabityForce);
     }
-    /////////////////////重力処理(末尾)/////////////////////
+    //---------------------重力処理(末尾)---------------------//
 
-    /////////////////////横移動(先頭)/////////////////////
+    //---------------------横移動(先頭)---------------------//
     [Header("横移動の速度")]
-    [SerializeField]private float moveSpeed = 0.5f;    //横移動の速度
+    [SerializeField]private float moveSpeed = 0.2f;    //横移動の速度
     [Header("デバックモード(チェックをつけるとキー入力で移動可)")]
     [SerializeField]private  bool debugMove = false;    //デバックモードフラグ
     private bool moveRightEnable = true; //横に移動できる状態ならばtrue,そうでないならばfalse
@@ -133,5 +144,5 @@ public class PlayerManager : MonoBehaviour {
             }
         }
     }
-    /////////////////////横移動(末尾)/////////////////////
+    //---------------------横移動(末尾)---------------------//
 }

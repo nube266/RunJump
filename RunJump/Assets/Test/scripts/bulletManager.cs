@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bulletManager : MonoBehaviour {
+public class BulletManager : MonoBehaviour {
 
     [Header("弾が消えるまでの時間")]
     [SerializeField] private float timer = 2.0f;  //弾が消えるまでの時間
@@ -19,8 +19,15 @@ public class bulletManager : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         string layerName = LayerMask.LayerToName(other.gameObject.layer);
-        if( layerName == "Map") {
+        if( layerName == "Map") {  // マップと衝突した場合
             Destroy(this.gameObject);
+        }
+        if( layerName == "Enemy") {  // 敵と衝突した場合
+            Destroy(this.gameObject);  // 弾を消滅
+            MobManager manager = other.GetComponent<MobManager> ();
+            if(manager != null) {
+                manager.ChangeHp(1);    // 敵に引数の分だけダメージを与える
+            }
         }
     }
 }
