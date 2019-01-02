@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour {
 
-    [Header("弾が消えるまでの時間")]
-    [SerializeField] private float timer = 2.0f;  //弾が消えるまでの時間
     [Header("弾の移動速度")]
     [SerializeField] private float moveSpeed = 0.5f;  //弾の移動速度
 
-    void Start () {
-        Destroy (this.gameObject, timer);
-    }
-
-    void Update () {
+    private void Update() {
         this.transform.Translate(new Vector2 (moveSpeed, 0));
     }
 
@@ -28,6 +22,12 @@ public class BulletManager : MonoBehaviour {
             if(manager != null) {
                 manager.ChangeHp(1);    // 敵に引数の分だけダメージを与える
             }
+        }
+    }
+
+    private void OnBecameInvisible() {  // 画面外に出た場合死亡
+        if(this.gameObject != null) {
+            Destroy(this.gameObject);
         }
     }
 }
