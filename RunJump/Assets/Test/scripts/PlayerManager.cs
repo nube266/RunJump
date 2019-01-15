@@ -68,13 +68,21 @@ public class PlayerManager : MonoBehaviour {
     //---------------------横方向における敵との当たり判定(先頭)---------------------//
     [Header("横方向に衝突判定を持つオブジェクト(Rayと衝突するマスク)")]
     [SerializeField] private LayerMask enemyLayerMask = 0;  //Rayと衝突するマスク
-    [Header("横方向の当たり判定の大きさ(右方向へのRayの長さ)")]
+    [Header("横方向の当たり判定の最大距離(右方向へのRayの長さ)")]
     [SerializeField] private float enemyRayDistance = 1.0f;
+    [Header("横方向の当たり判定の大きさ(右方向へのRayの太さ)")]
+    [SerializeField] private Vector2 enemyRaySize = new Vector2(0.5f, 0.5f);
     private void EnemyHitUpdata() {
         Ray rightRay = new Ray(this.transform.position, this.transform.right);  //右方向へのRay
-        RaycastHit2D rightHit = Physics2D.Raycast((Vector2)rightRay.origin, (Vector2)rightRay.direction, enemyRayDistance, enemyLayerMask);
+        RaycastHit2D rightHit = Physics2D.BoxCast(
+            origin: (Vector2)rightRay.origin,
+            size: enemyRaySize,
+            angle: 0.0f,
+            direction: (Vector2)rightRay.direction,
+            distance: enemyRayDistance,
+            layerMask: enemyLayerMask);
         if(rightHit.collider) {
-            Debug.Log(rightHit.collider.name);
+            Debug.Log("hit");
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
