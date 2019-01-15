@@ -14,13 +14,17 @@ public class PlayerManager : MonoBehaviour {
         body = GetComponent<Rigidbody2D> ();
         this.NotBossStart(); // ボス戦の判定
         cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+        if(debugMove == true) {
+            cameraObject.GetComponent<CameraManager>().SetDebugMoveMode();
+        }
     }
 
     private void Update() {
         this.NotBossUpdata();      // ボス戦の判定
         this.ChangeGroundUpdata(); // 接地の状態の変更
         this.JumpUpdata();         // ジャンプ入力受付
-        this.RayUpadata();         // Ray処理(横に壁があるかの判定)
+        this.WallHitUpadata();     // 横に壁があるかの判定
+        this.EnemyHitUpdata();     // 敵との当たり判定
         this.GrabityUpdata();      // 重力処理
         this.MoveUpdata();         // 横移動
     }
@@ -41,26 +45,39 @@ public class PlayerManager : MonoBehaviour {
             moveRightEnable = true;
         }
         else {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>().CameraStop();
+            cameraObject.GetComponent<CameraManager>().CameraStop();
             moveRightEnable = false;
         }
     }
     //---------------------ボス戦に到達したかどうかの判定(末尾)---------------------//
 
-    //---------------------Ray処理(先頭)---------------------//
-    [Header("Rayと衝突するマスク")]
-    [SerializeField] private LayerMask rayLayerMask = 0;  //Rayと衝突するマスク
-    [Header("右方向へのRayの長さ")]
-    [SerializeField] private float rightRayDistance = 1.0f;
-    private void RayUpadata() {
-        // 右方向へのRayの処理
+    //---------------------横に壁があるかの判定(先頭)---------------------//
+    [Header("壁判定の対象(Rayと衝突するマスク)")]
+    [SerializeField] private LayerMask mapLayerMask = 0;  //Rayと衝突するマスク
+    [Header("壁判定(右方向へのRayの長さ)")]
+    [SerializeField] private float wallRayDistance = 1.0f;
+    private void WallHitUpadata() {
         Ray rightRay = new Ray(this.transform.position, this.transform.right);  //右方向へのRay
-        RaycastHit2D rightHit = Physics2D.Raycast((Vector2)rightRay.origin, (Vector2)rightRay.direction, rightRayDistance, rayLayerMask);
+        RaycastHit2D rightHit = Physics2D.Raycast((Vector2)rightRay.origin, (Vector2)rightRay.direction, wallRayDistance, mapLayerMask);
         if(rightHit.collider) {
             moveRightEnable = false;
         }
     }
-    //---------------------Ray処理(末尾)---------------------//
+    //---------------------横に壁があるかの判定(末尾)---------------------//
+
+    //---------------------横方向における敵との当たり判定(先頭)---------------------//
+    [Header("横方向に衝突判定を持つオブジェクト(Rayと衝突するマスク)")]
+    [SerializeField] private LayerMask enemyLayerMask = 0;  //Rayと衝突するマスク
+    [Header("横方向の当たり判定の大きさ(右方向へのRayの長さ)")]
+    [SerializeField] private float enemyRayDistance = 1.0f;
+    private void EnemyHitUpdata() {
+        Ray rightRay = new Ray(this.transform.position, this.transform.right);  //右方向へのRay
+        RaycastHit2D rightHit = Physics2D.Raycast((Vector2)rightRay.origin, (Vector2)rightRay.direction, enemyRayDistance, enemyLayerMask);
+        if(rightHit.collider) {
+            Debug.Log(rightHit.collider.name);
+        }
+    }
+    //---------------------横方向における敵との当たり判定(末尾)---------------------//
 
     //---------------------接地状態の判定(先頭)---------------------//
     [Header("ジャンプ中かどうか判定するための閾値(小さいほど判定が甘くなる)")]

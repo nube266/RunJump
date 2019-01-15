@@ -148,10 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a523e05668a34d40be1e09d028aa516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLayerMask:
+  mapLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  rightRayDistance: 1000
+  wallRayDistance: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 1048576
+  enemyRayDistance: 1
   jumpThreshold: 0.5
   jumpForce: 2000
   firstJumpForce: 0.5

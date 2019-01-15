@@ -19,22 +19,27 @@ public class CameraManager : MonoBehaviour {
     [SerializeField] private float moveSpeed = 0.2f;
     private bool CameraStopFlag = false; // カメラを動かすかどうかのフラグ trueならば止める
 
+    private bool DebugMoveMode = false;  // デバックモードならばtrue
+
     private void Start () {
-        transform.position = new Vector3(player.transform.position.x + offsetX, offsetY, offsetZ);
+        this.transform.position = new Vector3(player.transform.position.x + offsetX, offsetY, offsetZ);
     }
 
     private void Update () {
-        if(CameraStopFlag == false) {
+        if(CameraStopFlag == false && DebugMoveMode == false) {
             this.transform.Translate(new Vector2 (moveSpeed, 0));
+        }
+        if(DebugMoveMode == true) {
+            this.transform.position = new Vector3(player.transform.position.x + offsetX, offsetY, offsetZ);
         }
     }
 
-    public void CameraStop() {
+    public void CameraStop() {  // カメラの停止
         CameraStopFlag = true;
     }
 
-    public void CameraStart() {
-        CameraStopFlag = false;
+    public void SetDebugMoveMode() {  // デバッグモード
+        DebugMoveMode = true;
     }
 
 }
