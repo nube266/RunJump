@@ -29,7 +29,7 @@ public class CameraManager : MonoBehaviour {
         if(CameraStopFlag == false && DebugMoveMode == false) {
             this.transform.Translate(new Vector2 (moveSpeed, 0));
         }
-        if(DebugMoveMode == true) {
+        if(DebugMoveMode == true && player != null) {
             this.transform.position = new Vector3(player.transform.position.x + offsetX, offsetY, offsetZ);
         }
     }

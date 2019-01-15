@@ -156,6 +156,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1048576
   enemyRayDistance: 1.1
+  enemyRaySize: {x: 0.5, y: 0.5}
+  treadOnEnemyRayDistance: 1
+  treadOnEnemyRaySize: {x: 1, y: 1}
   jumpThreshold: 0.5
   jumpForce: 2000
   firstJumpForce: 0.5

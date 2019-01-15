@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour {
         this.JumpUpdata();         // ジャンプ入力受付
         this.WallHitUpadata();     // 横に壁があるかの判定
         this.EnemyHitUpdata();     // 敵との当たり判定
+        this.TreadOnEnemyUpdata();       // 敵を踏んだ時の判定
         this.GrabityUpdata();      // 重力処理
         this.MoveUpdata();         // 横移動
     }
@@ -58,7 +59,11 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float wallRayDistance = 1.0f;
     private void WallHitUpadata() {
         Ray rightRay = new Ray(this.transform.position, this.transform.right);  //右方向へのRay
-        RaycastHit2D rightHit = Physics2D.Raycast((Vector2)rightRay.origin, (Vector2)rightRay.direction, wallRayDistance, mapLayerMask);
+        RaycastHit2D rightHit = Physics2D.Raycast(
+            origin: (Vector2)rightRay.origin,
+            direction: (Vector2)rightRay.direction,
+            distance: wallRayDistance,
+            layerMask: mapLayerMask);
         if(rightHit.collider) {
             moveRightEnable = false;
         }
@@ -66,14 +71,14 @@ public class PlayerManager : MonoBehaviour {
     //---------------------横に壁があるかの判定(末尾)---------------------//
 
     //---------------------横方向における敵との当たり判定(先頭)---------------------//
-    [Header("横方向に衝突判定を持つオブジェクト(Rayと衝突するマスク)")]
+    [Header("敵として衝突判定を持つオブジェクト(Rayと衝突するマスク)")]
     [SerializeField] private LayerMask enemyLayerMask = 0;  //Rayと衝突するマスク
     [Header("横方向の当たり判定の最大距離(右方向へのRayの長さ)")]
     [SerializeField] private float enemyRayDistance = 1.0f;
     [Header("横方向の当たり判定の大きさ(右方向へのRayの太さ)")]
     [SerializeField] private Vector2 enemyRaySize = new Vector2(0.5f, 0.5f);
     private void EnemyHitUpdata() {
-        Ray rightRay = new Ray(this.transform.position, this.transform.right);  //右方向へのRay
+        Ray rightRay = new Ray(this.transform.position, Vector2.right);  //右方向へのRay
         RaycastHit2D rightHit = Physics2D.BoxCast(
             origin: (Vector2)rightRay.origin,
             size: enemyRaySize,
@@ -82,7 +87,27 @@ public class PlayerManager : MonoBehaviour {
             distance: enemyRayDistance,
             layerMask: enemyLayerMask);
         if(rightHit.collider) {
-            Debug.Log("hit");
+            Debug.Log("敵と当たった");
+        }
+    }
+    //---------------------横方向における敵との当たり判定(末尾)---------------------//
+
+    //---------------------地面方向における敵との当たり判定(先頭)---------------------//
+    [Header("下方向の当たり判定の最大距離(下方向へのRayの長さ)")]
+    [SerializeField] private float treadOnEnemyRayDistance = 1.0f;
+    [Header("下方向の当たり判定の大きさ(下方向へのRayの太さ)")]
+    [SerializeField] private Vector2 treadOnEnemyRaySize = new Vector2(0.5f, 0.5f);
+    private void TreadOnEnemyUpdata() {
+        Ray downRay = new Ray(this.transform.position, Vector2.down);
+        RaycastHit2D downHit = Physics2D.BoxCast(
+            origin: (Vector2)downRay.origin,
+            size: treadOnEnemyRaySize,
+            angle: 0.0f,
+            direction: (Vector2)downRay.direction,
+            distance: treadOnEnemyRayDistance,
+            layerMask: enemyLayerMask);
+        if(downHit.collider) {
+            Debug.Log("踏んだ");
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
