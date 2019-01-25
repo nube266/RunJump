@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour {
         this.JumpUpdata();         // ジャンプ入力受付
         this.WallHitUpadata();     // 横に壁があるかの判定
         this.EnemyHitUpdata();     // 敵との当たり判定
-        this.TreadOnEnemyUpdata();       // 敵を踏んだ時の判定
+        this.TreadOnEnemyUpdata(); // 敵を踏んだ時の判定
         this.GrabityUpdata();      // 重力処理
         this.MoveUpdata();         // 横移動
     }
@@ -97,6 +97,7 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float treadOnEnemyRayDistance = 1.0f;
     [Header("下方向の当たり判定の大きさ(下方向へのRayの太さ)")]
     [SerializeField] private Vector2 treadOnEnemyRaySize = new Vector2(0.5f, 0.5f);
+    private Collider2D lastEnemy;  // 最後に踏んだ敵
     private void TreadOnEnemyUpdata() {
         Ray downRay = new Ray(this.transform.position, Vector2.down);
         RaycastHit2D downHit = Physics2D.BoxCast(
@@ -107,7 +108,11 @@ public class PlayerManager : MonoBehaviour {
             distance: treadOnEnemyRayDistance,
             layerMask: enemyLayerMask);
         if(downHit.collider) {
-            Debug.Log("踏んだ");
+            if(lastEnemy != downHit.collider) {
+                lastEnemy = downHit.collider;
+                body.velocity = new Vector2(body.velocity.x, 0);
+                body.AddForce (Vector3.up * jumpForce);
+            }
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
