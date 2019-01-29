@@ -159,6 +159,7 @@ MonoBehaviour:
   enemyRaySize: {x: 0.5, y: 0.5}
   treadOnEnemyRayDistance: 1
   treadOnEnemyRaySize: {x: 1, y: 1}
+  boundForce: 2000
   jumpThreshold: 0.5
   jumpForce: 2000
   firstJumpForce: 0.5

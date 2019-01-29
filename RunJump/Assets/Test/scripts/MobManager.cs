@@ -71,4 +71,12 @@ public class MobManager : MonoBehaviour {
         hp -= damage;
     }
     //---------------------HPの変動(末尾)---------------------//
+
+    //------------------踏まれた際にプレイヤーが飛ぶ強さを返す(先頭)------------------//
+    [Header("踏まれた際にプレイヤーが飛ぶ強さ")]
+    [SerializeField] private float playerBoundForce = 2000f;
+    public float GetPlayerBoundForce() {
+        return this.playerBoundForce;
+    }
+    //------------------踏まれた際にプレイヤーが飛ぶ強さを返す(末尾)------------------//
 }

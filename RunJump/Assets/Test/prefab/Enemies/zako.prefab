@@ -94,11 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d04b6d666dc94dc7b74faad5e6670a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 1
   moveEnable: 0
+  hp: 1
   moveSpeed: 0.1
   moveDirection: 0
   grabityForce: 0.1
+  playerBoundForce: 2000
 --- !u!61 &6219722382998981038
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -110,8 +110,9 @@ public class PlayerManager : MonoBehaviour {
         if(downHit.collider) {
             if(lastEnemy != downHit.collider) {
                 lastEnemy = downHit.collider;
-                body.velocity = new Vector2(body.velocity.x, 0);
-                body.AddForce (Vector3.up * jumpForce);
+                body.velocity = new Vector2(body.velocity.x, 0);  // 速度を0にする
+                body.AddForce (Vector3.up * lastEnemy.GetComponent<MobManager>()
+                               .GetPlayerBoundForce());
             }
         }
     }
