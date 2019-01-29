@@ -746,7 +746,7 @@ PrefabInstance:
     - target: {fileID: 114112704315616740, guid: b3b63438f9d104424be45a6a7d3f63ac,
         type: 3}
       propertyPath: enemyRayDistance
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 114112704315616740, guid: b3b63438f9d104424be45a6a7d3f63ac,
         type: 3}
@@ -1785,11 +1785,20 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4966726457484216, guid: 7d605d0427ea446b1bd28feb40d52f42, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114923581076497260, guid: 7d605d0427ea446b1bd28feb40d52f42,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 144134152}
+    - target: {fileID: 114923581076497260, guid: 7d605d0427ea446b1bd28feb40d52f42,
+        type: 3}
+      propertyPath: offsetY
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d605d0427ea446b1bd28feb40d52f42, type: 3}
 --- !u!1 &2141336738 stripped

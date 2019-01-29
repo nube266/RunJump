@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour {
         this.TreadOnEnemyUpdata(); // 敵を踏んだ時の判定
         this.GrabityUpdata();      // 重力処理
         this.MoveUpdata();         // 横移動
+        this.DamageUpdata();       // ダメージ処理
     }
 
     //---------------------ボス戦に到達したかどうかの判定(先頭)---------------------//
@@ -88,6 +89,7 @@ public class PlayerManager : MonoBehaviour {
             layerMask: enemyLayerMask);
         if(rightHit.collider) {
             Debug.Log("敵と当たった");
+            isDamage = true;
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
@@ -201,4 +203,26 @@ public class PlayerManager : MonoBehaviour {
         }
     }
     //---------------------横移動(末尾)---------------------//
+
+    //---------------------ダメージを受けた際の処理(先頭)---------------------//
+    [Header("ダメージを受けた際の点滅周期(倍率)")]
+    [SerializeField]private float blinkingCycle = 10f;
+    private bool isDamage = false;  // ダメージを受けた場合true
+    [Header("ダメージを受けた際の無敵時間")]
+    [SerializeField]private float maxInvicibleTime = 2.0f;
+    private float invincibleTime = 0.0f;  // ダメージを受けてからの経過時間(累積無敵時間)
+    private void DamageUpdata() {
+        if(isDamage == true && (invincibleTime < maxInvicibleTime)) {
+            invincibleTime += Time.deltaTime;
+            float level = Mathf.Abs(Mathf.Sin(Time.time * blinkingCycle));
+		    this.gameObject.GetComponent<SpriteRenderer>().color =  new Color(1f,1f,1f,level);
+        }
+        else if(isDamage == true) {
+            isDamage = false;
+            invincibleTime = 0.0f;
+            this.gameObject.GetComponent<SpriteRenderer>().color =  new Color(1f,1f,1f,1f);
+        }
+    }
+    //---------------------ダメージを受けた際の処理(末尾)---------------------//
+
 }
