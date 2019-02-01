@@ -8,12 +8,17 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     private Rigidbody2D body;           // このスクリプトが適用されているRigidbody
-    private GameObject cameraObject;          // カメラのゲームオブジェクト
+    private GameObject cameraObject;    // カメラのゲームオブジェクト
+    [Header("通常状態のレイヤーb暗号")]
+    [SerializeField] private int normalPlayerLayerNumber = 30;
+    [Header("無敵状態のレイヤー番号")]
+    [SerializeField] private int invinciblePlayerLayerNumber = 31;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D> ();
         this.NotBossStart(); // ボス戦の判定
         cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+        this.gameObject.layer = normalPlayerLayerNumber;
         if(debugMove == true) {
             cameraObject.GetComponent<CameraManager>().SetDebugMoveMode();
         }
@@ -72,8 +77,8 @@ public class PlayerManager : MonoBehaviour {
     //---------------------横に壁があるかの判定(末尾)---------------------//
 
     //---------------------横方向における敵との当たり判定(先頭)---------------------//
-    [Header("敵として衝突判定を持つオブジェクト(Rayと衝突するマスク)")]
-    [SerializeField] private LayerMask enemyLayerMask = 0;  //Rayと衝突するマスク
+    [Header("敵として衝突判定を持つレイヤー(Rayと衝突するマスク)")]
+    [SerializeField] private LayerMask enemyLayerMask = 0;
     [Header("横方向の当たり判定の最大距離(右方向へのRayの長さ)")]
     [SerializeField] private float enemyRayDistance = 1.0f;
     [Header("横方向の当たり判定の大きさ(右方向へのRayの太さ)")]
@@ -88,8 +93,8 @@ public class PlayerManager : MonoBehaviour {
             distance: enemyRayDistance,
             layerMask: enemyLayerMask);
         if(rightHit.collider) {
-            Debug.Log("敵と当たった");
             isDamage = true;
+            lastEnemy = rightHit.collider;
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
@@ -216,11 +221,13 @@ public class PlayerManager : MonoBehaviour {
             invincibleTime += Time.deltaTime;
             float level = Mathf.Abs(Mathf.Sin(Time.time * blinkingCycle));
 		    this.gameObject.GetComponent<SpriteRenderer>().color =  new Color(1f,1f,1f,level);
+            this.gameObject.layer = invinciblePlayerLayerNumber;
         }
         else if(isDamage == true) {
             isDamage = false;
             invincibleTime = 0.0f;
             this.gameObject.GetComponent<SpriteRenderer>().color =  new Color(1f,1f,1f,1f);
+            this.gameObject.layer = normalPlayerLayerNumber;
         }
     }
     //---------------------ダメージを受けた際の処理(末尾)---------------------//

@@ -763,6 +763,21 @@ PrefabInstance:
       propertyPath: maxInvicibleTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114112704315616740, guid: b3b63438f9d104424be45a6a7d3f63ac,
+        type: 3}
+      propertyPath: normalPlayerLayer.m_Bits
+      value: 1073741824
+      objectReference: {fileID: 0}
+    - target: {fileID: 114112704315616740, guid: b3b63438f9d104424be45a6a7d3f63ac,
+        type: 3}
+      propertyPath: invinciblePlayerLayer.m_Bits
+      value: 2147483648
+      objectReference: {fileID: 0}
+    - target: {fileID: 114112704315616740, guid: b3b63438f9d104424be45a6a7d3f63ac,
+        type: 3}
+      propertyPath: invinciblePlayerLayerNumber
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 61028596836159672, guid: b3b63438f9d104424be45a6a7d3f63ac,
         type: 3}
       propertyPath: m_Size.y
