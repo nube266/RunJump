@@ -955,6 +955,11 @@ PrefabInstance:
       propertyPath: invinciblePlayerLayerNumber
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 114112704315616740, guid: b3b63438f9d104424be45a6a7d3f63ac,
+        type: 3}
+      propertyPath: gravityForce
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 61028596836159672, guid: b3b63438f9d104424be45a6a7d3f63ac,
         type: 3}
       propertyPath: m_Size.y
@@ -1408,6 +1413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: grabityForce
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017706169143916188, guid: 003d114962a154233a278b10405dae6e,
+        type: 3}
+      propertyPath: gravityForce
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 003d114962a154233a278b10405dae6e, type: 3}
