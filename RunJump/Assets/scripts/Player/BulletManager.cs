@@ -14,6 +14,10 @@ public class BulletManager : MonoBehaviour {
     private void OnTriggerEnter2D (Collider2D other) {
         string layerName = LayerMask.LayerToName (other.gameObject.layer);
         if (layerName == "Map") { // マップと衝突した場合
+            BrokenFloor manager = other.GetComponent<BrokenFloor> ();
+            if (manager != null) {
+                manager.ChangeHp (1); // 敵に引数の分だけダメージを与える
+            }
             Destroy (this.gameObject);
         }
         if (layerName == "Enemy") { // 敵と衝突した場合
