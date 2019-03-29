@@ -6,9 +6,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobManager : MonoBehaviour {
+public class EnemyManager : MonoBehaviour {
 
     private Rigidbody2D body; // このスクリプトが適用されているRigidbody
+
+    [Header ("弾による攻撃でダメージが与えられるかどうか")]
+    [SerializeField] private bool bulletDamageEnable = true;
+
+    [Header ("踏むことでダメージが与えられるかどうか")]
+    [SerializeField] private bool StepDamageEnable = true;
 
     private void Start () {
         body = GetComponent<Rigidbody2D> ();
@@ -81,7 +87,21 @@ public class MobManager : MonoBehaviour {
 
     //------------------画面外に出た際の判定(先頭)------------------//
     private void OnBecameInvisible () {
-        Destroy (this.gameObject);
+        if (this.gameObject.tag == "Mob") {
+            Destroy (this.gameObject);
+        }
     }
     //------------------画面外に出た際の判定(末尾)------------------//
+
+    //-------------弾による攻撃でダメージを与えられるかどうかを返す(先頭)-------------//
+    public bool GetBulletDamageEnable () {
+        return this.bulletDamageEnable;
+    }
+    //-------------弾による攻撃でダメージを与えられるかどうかを返す(末尾)-------------//
+
+    //-------------踏むことででダメージを与えられるかどうかを返す(先頭)-------------//
+    public bool GetStepDamageEnable () {
+        return this.StepDamageEnable;
+    }
+    //-------------踏むことででダメージを与えられるかどうかを返す(末尾)-------------//
 }

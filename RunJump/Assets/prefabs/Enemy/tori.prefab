@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4760578568528512014}
   m_Layer: 20
   m_Name: tori
-  m_TagString: Enemy
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -9,6 +9,8 @@ TagManager:
   - GoalLine
   - Enemy
   - CanBreakGround
+  - Boss
+  - Mob
   layers:
   - Default
   - TransparentFX

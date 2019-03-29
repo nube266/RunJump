@@ -22,14 +22,16 @@ public class BulletManager : MonoBehaviour {
         }
         if (layerName == "Enemy") { // 敵と衝突した場合
             Destroy (this.gameObject); // 弾を消滅
-            MobManager manager = other.GetComponent<MobManager> ();
+            EnemyManager manager = other.GetComponent<EnemyManager> ();
             if (manager != null) {
-                manager.ChangeHp (1); // 敵に引数の分だけダメージを与える
+                if (manager.GetBulletDamageEnable ()) {
+                    manager.ChangeHp (1); // 敵に引数の分だけダメージを与える
+                }
             }
         }
     }
 
-    private void OnBecameInvisible () { // 画面外に出た場合死亡
+    private void OnBecameInvisible () { // 画面外に出た場合消す
         if (this.gameObject != null) {
             Destroy (this.gameObject);
         }

@@ -116,9 +116,18 @@ public class PlayerManager : MonoBehaviour {
             if (lastEnemy != downHit.collider) {
                 lastEnemy = downHit.collider;
                 body.velocity = new Vector2 (body.velocity.x, 0); // 速度を0にする
-                body.AddForce (Vector3.up * lastEnemy.GetComponent<MobManager> ()
+                body.AddForce (Vector3.up * lastEnemy.GetComponent<EnemyManager> ()
                     .GetPlayerBoundForce ());
+                StartCoroutine ("DeleteLastEnemy");
             }
+        }
+    }
+
+    IEnumerator DeleteLastEnemy () { // 一定時間後に最後に衝突した敵の変数を初期化
+        Collider2D enemy = lastEnemy;
+        yield return new WaitForSeconds (0.3f);
+        if (this.lastEnemy == enemy) {
+            this.lastEnemy = null;
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
