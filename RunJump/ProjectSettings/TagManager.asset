@@ -8,6 +8,7 @@ TagManager:
   - GroundObject
   - GoalLine
   - Enemy
+  - CanBreakGround
   layers:
   - Default
   - TransparentFX
