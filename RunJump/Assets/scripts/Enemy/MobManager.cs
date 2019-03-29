@@ -78,4 +78,10 @@ public class MobManager : MonoBehaviour {
         return this.playerBoundForce;
     }
     //------------------踏まれた際にプレイヤーが飛ぶ強さを返す(末尾)------------------//
+
+    //------------------画面外に出た際の判定(先頭)------------------//
+    private void OnBecameInvisible () {
+        Destroy (this.gameObject);
+    }
+    //------------------画面外に出た際の判定(末尾)------------------//
 }
