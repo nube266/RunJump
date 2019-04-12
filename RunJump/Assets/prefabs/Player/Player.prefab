@@ -165,11 +165,17 @@ MonoBehaviour:
   jumpThreshold: 0.5
   jumpForce: 2000
   firstJumpForce: 0.5
-  grabityForce: 100
+  gravityForce: 100
   moveSpeed: 0.2
   debugMove: 0
   blinkingCycle: 10
   maxInvicibleTime: 2
+  player_life: 3
+  lifePrefab: {fileID: 6508062146025908502, guid: d151d65458f3a4e4ba1c2d900835be94,
+    type: 3}
+  lifeDistance: 1
+  lifeOffsetX: -1
+  lifeOffsetY: 3
 --- !u!50 &5319665278121998846
 Rigidbody2D:
   serializedVersion: 4

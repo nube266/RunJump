@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour {
     private void Awake () {
         body = GetComponent<Rigidbody2D> ();
         this.NotBossStart (); // ボス戦の判定
+        this.LifeStart (); // ライフの描画処理(初期化)
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
         this.gameObject.layer = normalPlayerLayerNumber;
         if (debugMove == true) {
@@ -34,6 +35,7 @@ public class PlayerManager : MonoBehaviour {
         this.GravityUpdata (); // 重力処理
         this.MoveUpdata (); // 横移動
         this.DamageUpdata (); // ダメージ処理
+        this.LifeUpdata (); // ライフの描画処理
     }
 
     //---------------------ボス戦に到達したかどうかの判定(先頭)---------------------//
@@ -238,4 +240,40 @@ public class PlayerManager : MonoBehaviour {
     }
     //---------------------ダメージを受けた際の処理(末尾)---------------------//
 
+    //---------------------ライフの描画処理(先頭)---------------------//
+    [Header ("プレイヤーの体力")]
+    [SerializeField] private int player_life = 3;
+    [Header ("ライフのプレハブ")]
+    [SerializeField] private GameObject lifePrefab = null;
+    [Header ("ライフ同士の距離")]
+    [SerializeField] private float lifeDistance = 1.0f;
+    [Header ("ライフの座標に関するオフセット")]
+    [SerializeField] private float lifeOffsetX = 1.0f;
+    [SerializeField] private float lifeOffsetY = 1.0f;
+    private GameObject[] lifeObject = new GameObject[3];
+    public void LifeStart () {
+        Vector3 pos = transform.position; // 弾を射出するオブジェクトの位置
+        for (int i = 0; i < player_life; i++) {
+            lifeObject[i] = Instantiate (
+                lifePrefab, // 生成するPrefab
+                new Vector3 (
+                    this.transform.position.x + i * lifeDistance + lifeOffsetX,
+                    this.transform.position.y + lifeOffsetY,
+                    this.transform.position.z
+                ), // 位置
+                Quaternion.identity
+            ); // 角度
+        }
+    }
+
+    public void LifeUpdata () {
+        for (int i = 0; i < player_life; i++) {
+            lifeObject[i].transform.position = new Vector3 (
+                this.transform.position.x + i * lifeDistance + lifeOffsetX,
+                this.transform.position.y + lifeOffsetY,
+                this.transform.position.z
+            );
+        }
+    }
+    //---------------------ライフの描画処理(末尾)---------------------//
 }
