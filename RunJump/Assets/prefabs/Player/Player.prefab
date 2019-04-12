@@ -209,10 +209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0802858a48a4641b495490d1e79d8857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1038999731830030, guid: ac13ce1b46b414829b3e1c422bff3081,
+  bulletPrefab: {fileID: 1038999731830030, guid: 5fdf056faea8a49399012e4e40eac0be,
     type: 3}
-  offsetX: 1
-  offsetY: 0
+  offsetX: 1.5
+  offsetY: -0.5
 --- !u!95 &1016520039344151692
 Animator:
   serializedVersion: 3
