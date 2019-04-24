@@ -92,9 +92,10 @@ public class PlayerManager : MonoBehaviour {
             direction: (Vector2) rightRay.direction,
             distance : enemyRayDistance,
             layerMask : enemyLayerMask);
-        if (rightHit.collider) {
+        if (rightHit.collider && isDamage == false) {
             isDamage = true;
             lastEnemy = rightHit.collider;
+            this.ChangeLife (-1);
         }
     }
     //---------------------横方向における敵との当たり判定(末尾)---------------------//
@@ -242,7 +243,7 @@ public class PlayerManager : MonoBehaviour {
 
     //---------------------ライフの描画処理(先頭)---------------------//
     [Header ("プレイヤーの体力")]
-    [SerializeField] private int player_life = 3;
+    [SerializeField] private int playerLife = 3;
     [Header ("ライフのプレハブ")]
     [SerializeField] private GameObject lifePrefab = null;
     [Header ("ライフ同士の距離")]
@@ -252,8 +253,8 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float lifeOffsetY = 1.0f;
     private GameObject[] lifeObject = new GameObject[3];
     public void LifeStart () {
-        Vector3 pos = transform.position; // 弾を射出するオブジェクトの位置
-        for (int i = 0; i < player_life; i++) {
+        Vector3 pos = transform.position;
+        for (int i = 0; i < playerLife; i++) {
             lifeObject[i] = Instantiate (
                 lifePrefab, // 生成するPrefab
                 new Vector3 (
@@ -267,13 +268,25 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void LifeUpdata () {
-        for (int i = 0; i < player_life; i++) {
+        for (int i = 0; i < playerLife; i++) {
             lifeObject[i].transform.position = new Vector3 (
                 this.transform.position.x + i * lifeDistance + lifeOffsetX,
                 this.transform.position.y + lifeOffsetY,
                 this.transform.position.z
             );
         }
+    }
+
+    // ライフ変更
+    private void ChangeLife (int changeLife) { // 引数:ライフの変更値
+        playerLife += changeLife;
+        foreach (var obj in lifeObject) {
+            Destroy (obj);
+        }
+        if (playerLife == 0) {
+            this.DiedProcess ();
+        }
+        LifeStart (); // 体力の初期化
     }
     //---------------------ライフの描画処理(末尾)---------------------//
 }
