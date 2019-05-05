@@ -163,6 +163,10 @@ MonoBehaviour:
   treadOnEnemyRayDistance: 1
   treadOnEnemyRaySize: {x: 1, y: 1}
   jumpThreshold: 0.5
+  GameOverTextObject: {fileID: 6810152160645391958, guid: df477f3e4bc4541a396c59b8c1d26a28,
+    type: 3}
+  GameOverTextOffsetX: 0
+  GameOverTextOffsetY: 0
   jumpForce: 2000
   firstJumpForce: 0.5
   gravityForce: 100
@@ -170,7 +174,7 @@ MonoBehaviour:
   debugMove: 0
   blinkingCycle: 10
   maxInvicibleTime: 2
-  player_life: 3
+  playerLife: 3
   lifePrefab: {fileID: 6508062146025908502, guid: d151d65458f3a4e4ba1c2d900835be94,
     type: 3}
   lifeDistance: 1
@@ -195,7 +199,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!114 &5257236788967468626
 MonoBehaviour:

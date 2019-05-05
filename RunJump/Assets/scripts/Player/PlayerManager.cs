@@ -1,5 +1,6 @@
 ﻿// 概要：プレイヤーの基本動作
-// 機能:ジャンプ，接地判定，重力処理，ボス戦到達判定，横移動，ジャンプ処理、画面外に出た場合の死亡判定
+// 機能:ジャンプ,接地判定,重力処理,ボス戦到達判定,横移動
+// ジャンプ処理,画面外に出た場合の死亡判定,当たり判定,ライフ処理
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ public class PlayerManager : MonoBehaviour {
     [Header ("無敵状態のレイヤー番号")]
     [SerializeField] private int invinciblePlayerLayerNumber = 31;
 
+    // プレイヤーの初期化
     private void Awake () {
         body = GetComponent<Rigidbody2D> ();
         this.NotBossStart (); // ボス戦の判定
@@ -25,6 +27,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    // プレイヤーの更新
     private void Update () {
         this.NotBossUpdata (); // ボス戦の判定
         this.ChangeGroundUpdata (); // 接地の状態の変更
@@ -156,10 +159,25 @@ public class PlayerManager : MonoBehaviour {
     //---------------------画面外に出た場合の死亡判定(末尾)---------------------//
 
     //---------------------死亡処理(先頭)---------------------//
+    [Header ("GAME OVER時に表示されるテキスト")]
+    [SerializeField] private GameObject GameOverTextObject = null;
+    [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(X方向)")]
+    [SerializeField] private float GameOverTextOffsetX = 0.5f;
+    [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(Y方向)")]
+    [SerializeField] private float GameOverTextOffsetY = 0.5f;
     private void DiedProcess () { // 画面外に出た場合死亡
         if (cameraObject != null) { //カメラがあるならばカメラを停止
             cameraObject.GetComponent<CameraManager> ().CameraStop ();
         }
+        Instantiate (
+            GameOverTextObject, // 生成するPrefab
+            new Vector3 (
+                cameraObject.transform.position.x + GameOverTextOffsetX,
+                cameraObject.transform.position.y + GameOverTextOffsetY,
+                this.transform.position.z
+            ), // 位置
+            Quaternion.identity
+        ); // 角度
         Destroy (this.gameObject);
     }
     //---------------------死亡処理(末尾)---------------------//
@@ -241,7 +259,7 @@ public class PlayerManager : MonoBehaviour {
     }
     //---------------------ダメージを受けた際の処理(末尾)---------------------//
 
-    //---------------------ライフの描画処理(先頭)---------------------//
+    //---------------------ライフ処理(先頭)---------------------//
     [Header ("プレイヤーの体力")]
     [SerializeField] private int playerLife = 3;
     [Header ("ライフのプレハブ")]
@@ -252,6 +270,8 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float lifeOffsetX = 1.0f;
     [SerializeField] private float lifeOffsetY = 1.0f;
     private GameObject[] lifeObject = new GameObject[3];
+
+    // ライフの描画処理
     public void LifeStart () {
         Vector3 pos = transform.position;
         for (int i = 0; i < playerLife; i++) {
@@ -277,7 +297,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    // ライフ変更
+    // ライフ変更処理
     private void ChangeLife (int changeLife) { // 引数:ライフの変更値
         playerLife += changeLife;
         foreach (var obj in lifeObject) {

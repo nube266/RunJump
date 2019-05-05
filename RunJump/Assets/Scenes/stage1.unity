@@ -38728,6 +38728,16 @@ PrefabInstance:
       propertyPath: debugMove
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5257866488442329020, guid: 88588f426e4b6484c8440935ecc9e5d7,
+        type: 3}
+      propertyPath: GameOverTextOffsetX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257866488442329020, guid: 88588f426e4b6484c8440935ecc9e5d7,
+        type: 3}
+      propertyPath: GameOverTextOffsetY
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88588f426e4b6484c8440935ecc9e5d7, type: 3}
 --- !u!4 &3452320943776865019
