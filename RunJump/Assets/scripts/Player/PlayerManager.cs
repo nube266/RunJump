@@ -125,6 +125,10 @@ public class PlayerManager : MonoBehaviour {
                 body.AddForce (Vector3.up * lastEnemy.GetComponent<EnemyManager> ()
                     .GetPlayerBoundForce ());
                 StartCoroutine ("DeleteLastEnemy");
+                if (lastEnemy.GetComponent<EnemyManager> ()
+                    .GetStepDamageEnable () == true) {
+                    lastEnemy.GetComponent<EnemyManager> ().ChangeHp (1);
+                }
             }
         }
     }
