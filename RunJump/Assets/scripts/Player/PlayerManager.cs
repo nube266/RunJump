@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     private Rigidbody2D body; // このスクリプトが適用されているRigidbody
-    private GameObject cameraObject; // カメラのゲームオブジェクト
+    private GameObject cameraObject = null; // カメラのゲームオブジェクト
     [Header ("通常状態のレイヤーb暗号")]
     [SerializeField] private int normalPlayerLayerNumber = 30;
     [Header ("無敵状態のレイヤー番号")]
@@ -170,7 +170,7 @@ public class PlayerManager : MonoBehaviour {
     [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(Y方向)")]
     [SerializeField] private float GameOverTextOffsetY = 0.5f;
     private void DiedProcess () { // 画面外に出た場合死亡
-        if (cameraObject != null) { //カメラがあるならばカメラを停止
+        if (isLife == true && cameraObject != null) { //カメラがあるならばカメラを停止
             cameraObject.GetComponent<CameraManager> ().CameraStop ();
         }
         if (isLife == true) { // ライフを使用しない時
