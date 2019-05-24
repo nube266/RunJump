@@ -173,15 +173,17 @@ public class PlayerManager : MonoBehaviour {
         if (cameraObject != null) { //カメラがあるならばカメラを停止
             cameraObject.GetComponent<CameraManager> ().CameraStop ();
         }
-        Instantiate (
-            GameOverTextObject, // 生成するPrefab
-            new Vector3 (
-                cameraObject.transform.position.x + GameOverTextOffsetX,
-                cameraObject.transform.position.y + GameOverTextOffsetY,
-                this.transform.position.z
-            ), // 位置
-            Quaternion.identity
-        ); // 角度
+        if (isLife == true) { // ライフを使用しない時
+            Instantiate (
+                GameOverTextObject, // 生成するPrefab
+                new Vector3 (
+                    cameraObject.transform.position.x + GameOverTextOffsetX,
+                    cameraObject.transform.position.y + GameOverTextOffsetY,
+                    this.transform.position.z
+                ), // 位置
+                Quaternion.identity
+            ); // 角度
+        }
         Destroy (this.gameObject);
     }
     //---------------------死亡処理(末尾)---------------------//
@@ -273,31 +275,37 @@ public class PlayerManager : MonoBehaviour {
     [Header ("ライフの座標に関するオフセット")]
     [SerializeField] private float lifeOffsetX = 1.0f;
     [SerializeField] private float lifeOffsetY = 1.0f;
+    [SerializeField] private bool isLife = true; // ライフの描画の可否
+    [Header ("ライフの描画の可否")]
     private GameObject[] lifeObject = new GameObject[3];
 
     // ライフの描画処理
     public void LifeStart () {
-        Vector3 pos = transform.position;
-        for (int i = 0; i < playerLife; i++) {
-            lifeObject[i] = Instantiate (
-                lifePrefab, // 生成するPrefab
-                new Vector3 (
-                    this.transform.position.x + i * lifeDistance + lifeOffsetX,
-                    this.transform.position.y + lifeOffsetY,
-                    this.transform.position.z
-                ), // 位置
-                Quaternion.identity
-            ); // 角度
+        if (isLife == true) {
+            Vector3 pos = transform.position;
+            for (int i = 0; i < playerLife; i++) {
+                lifeObject[i] = Instantiate (
+                    lifePrefab, // 生成するPrefab
+                    new Vector3 (
+                        this.transform.position.x + i * lifeDistance + lifeOffsetX,
+                        this.transform.position.y + lifeOffsetY,
+                        this.transform.position.z
+                    ), // 位置
+                    Quaternion.identity
+                ); // 角度
+            }
         }
     }
 
     public void LifeUpdata () {
-        for (int i = 0; i < playerLife; i++) {
-            lifeObject[i].transform.position = new Vector3 (
-                this.transform.position.x + i * lifeDistance + lifeOffsetX,
-                this.transform.position.y + lifeOffsetY,
-                this.transform.position.z
-            );
+        if (isLife == true) {
+            for (int i = 0; i < playerLife; i++) {
+                lifeObject[i].transform.position = new Vector3 (
+                    this.transform.position.x + i * lifeDistance + lifeOffsetX,
+                    this.transform.position.y + lifeOffsetY,
+                    this.transform.position.z
+                );
+            }
         }
     }
 
