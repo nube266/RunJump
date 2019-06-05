@@ -10,7 +10,8 @@ public class PlayerManager : MonoBehaviour {
 
     private Rigidbody2D body; // このスクリプトが適用されているRigidbody
     private GameObject cameraObject = null; // カメラのゲームオブジェクト
-    [Header ("通常状態のレイヤーb暗号")]
+    private GameObject diedManager = null; // 死亡時の処理
+    [Header ("通常状態のレイヤー暗号")]
     [SerializeField] private int normalPlayerLayerNumber = 30;
     [Header ("無敵状態のレイヤー番号")]
     [SerializeField] private int invinciblePlayerLayerNumber = 31;
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour {
         this.NotBossStart (); // ボス戦の判定
         this.LifeStart (); // ライフの描画処理(初期化)
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
+        diedManager = GameObject.Find ("DiedManager");
         this.gameObject.layer = normalPlayerLayerNumber;
         if (debugMove == true) {
             cameraObject.GetComponent<CameraManager> ().SetDebugMoveMode ();
@@ -163,26 +165,15 @@ public class PlayerManager : MonoBehaviour {
     //---------------------画面外に出た場合の死亡判定(末尾)---------------------//
 
     //---------------------死亡処理(先頭)---------------------//
-    [Header ("GAME OVER時に表示されるテキスト")]
-    [SerializeField] private GameObject GameOverTextObject = null;
-    [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(X方向)")]
-    [SerializeField] private float GameOverTextOffsetX = 0.5f;
-    [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(Y方向)")]
-    [SerializeField] private float GameOverTextOffsetY = 0.5f;
+
     private void DiedProcess () { // 画面外に出た場合死亡
         if (isLife == true && cameraObject != null) { //カメラがあるならばカメラを停止
             cameraObject.GetComponent<CameraManager> ().CameraStop ();
         }
-        if (isLife == true) { // ライフを使用しない時
-            Instantiate (
-                GameOverTextObject, // 生成するPrefab
-                new Vector3 (
-                    cameraObject.transform.position.x + GameOverTextOffsetX,
-                    cameraObject.transform.position.y + GameOverTextOffsetY,
-                    this.transform.position.z
-                ), // 位置
-                Quaternion.identity
-            ); // 角度
+        if (diedManager != null) {
+            diedManager.GetComponent<DiedManager> ().SetPlayerDied ();
+        } else {
+            Debug.Log ("DiedManagerがこのシーンに存在しません");
         }
         Destroy (this.gameObject);
     }
