@@ -9,8 +9,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     private Rigidbody2D body; // このスクリプトが適用されているRigidbody
-    private GameObject cameraObject; // カメラのゲームオブジェクト
-    [Header ("通常状態のレイヤーb暗号")]
+    private GameObject cameraObject = null; // カメラのゲームオブジェクト
+    private GameObject diedManager = null; // 死亡時の処理
+    [Header ("通常状態のレイヤー暗号")]
     [SerializeField] private int normalPlayerLayerNumber = 30;
     [Header ("無敵状態のレイヤー番号")]
     [SerializeField] private int invinciblePlayerLayerNumber = 31;
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour {
         this.NotBossStart (); // ボス戦の判定
         this.LifeStart (); // ライフの描画処理(初期化)
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
+        diedManager = GameObject.Find ("DiedManager");
         this.gameObject.layer = normalPlayerLayerNumber;
         if (debugMove == true) {
             cameraObject.GetComponent<CameraManager> ().SetDebugMoveMode ();
@@ -163,25 +165,16 @@ public class PlayerManager : MonoBehaviour {
     //---------------------画面外に出た場合の死亡判定(末尾)---------------------//
 
     //---------------------死亡処理(先頭)---------------------//
-    [Header ("GAME OVER時に表示されるテキスト")]
-    [SerializeField] private GameObject GameOverTextObject = null;
-    [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(X方向)")]
-    [SerializeField] private float GameOverTextOffsetX = 0.5f;
-    [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(Y方向)")]
-    [SerializeField] private float GameOverTextOffsetY = 0.5f;
+
     private void DiedProcess () { // 画面外に出た場合死亡
-        if (cameraObject != null) { //カメラがあるならばカメラを停止
+        if (isLife == true && cameraObject != null) { //カメラがあるならばカメラを停止
             cameraObject.GetComponent<CameraManager> ().CameraStop ();
         }
-        Instantiate (
-            GameOverTextObject, // 生成するPrefab
-            new Vector3 (
-                cameraObject.transform.position.x + GameOverTextOffsetX,
-                cameraObject.transform.position.y + GameOverTextOffsetY,
-                this.transform.position.z
-            ), // 位置
-            Quaternion.identity
-        ); // 角度
+        if (diedManager != null) {
+            diedManager.GetComponent<DiedManager> ().SetPlayerDied ();
+        } else {
+            Debug.Log ("DiedManagerがこのシーンに存在しません");
+        }
         Destroy (this.gameObject);
     }
     //---------------------死亡処理(末尾)---------------------//
@@ -273,31 +266,37 @@ public class PlayerManager : MonoBehaviour {
     [Header ("ライフの座標に関するオフセット")]
     [SerializeField] private float lifeOffsetX = 1.0f;
     [SerializeField] private float lifeOffsetY = 1.0f;
+    [SerializeField] private bool isLife = true; // ライフの描画の可否
+    [Header ("ライフの描画の可否")]
     private GameObject[] lifeObject = new GameObject[3];
 
     // ライフの描画処理
     public void LifeStart () {
-        Vector3 pos = transform.position;
-        for (int i = 0; i < playerLife; i++) {
-            lifeObject[i] = Instantiate (
-                lifePrefab, // 生成するPrefab
-                new Vector3 (
-                    this.transform.position.x + i * lifeDistance + lifeOffsetX,
-                    this.transform.position.y + lifeOffsetY,
-                    this.transform.position.z
-                ), // 位置
-                Quaternion.identity
-            ); // 角度
+        if (isLife == true) {
+            Vector3 pos = transform.position;
+            for (int i = 0; i < playerLife; i++) {
+                lifeObject[i] = Instantiate (
+                    lifePrefab, // 生成するPrefab
+                    new Vector3 (
+                        this.transform.position.x + i * lifeDistance + lifeOffsetX,
+                        this.transform.position.y + lifeOffsetY,
+                        this.transform.position.z
+                    ), // 位置
+                    Quaternion.identity
+                ); // 角度
+            }
         }
     }
 
     public void LifeUpdata () {
-        for (int i = 0; i < playerLife; i++) {
-            lifeObject[i].transform.position = new Vector3 (
-                this.transform.position.x + i * lifeDistance + lifeOffsetX,
-                this.transform.position.y + lifeOffsetY,
-                this.transform.position.z
-            );
+        if (isLife == true) {
+            for (int i = 0; i < playerLife; i++) {
+                lifeObject[i].transform.position = new Vector3 (
+                    this.transform.position.x + i * lifeDistance + lifeOffsetX,
+                    this.transform.position.y + lifeOffsetY,
+                    this.transform.position.z
+                );
+            }
         }
     }
 

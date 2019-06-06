@@ -180,6 +180,7 @@ MonoBehaviour:
   lifeDistance: 1
   lifeOffsetX: -1
   lifeOffsetY: 3
+  isLife: 1
 --- !u!50 &5319665278121998846
 Rigidbody2D:
   serializedVersion: 4
