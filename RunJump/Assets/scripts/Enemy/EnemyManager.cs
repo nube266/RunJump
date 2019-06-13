@@ -34,6 +34,10 @@ public class EnemyManager : MonoBehaviour {
             moveStartFlag = true;
         }
     }
+
+    public void MoveStart () {
+        moveStartFlag = true;
+    }
     //---------------------移動開始判定(末尾)---------------------//
 
     //---------------------死亡判定(先頭)---------------------//
@@ -98,6 +102,12 @@ public class EnemyManager : MonoBehaviour {
         return this.bulletDamageEnable;
     }
     //-------------弾による攻撃でダメージを与えられるかどうかを返す(末尾)-------------//
+
+    //-------------弾による攻撃でダメージを与えられるようにする(先頭)-------------//
+    public void SetBulletDamageEnable () {
+        this.bulletDamageEnable = true;
+    }
+    //-------------弾による攻撃でダメージを与えられるかどうかを変更する(末尾)-------------//
 
     //-------------踏むことででダメージを与えられるかどうかを返す(先頭)-------------//
     public bool GetStepDamageEnable () {

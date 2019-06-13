@@ -143,8 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d04b6d666dc94dc7b74faad5e6670a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveEnable: 1
-  hp: 1
+  bulletDamageEnable: 0
+  StepDamageEnable: 1
+  moveEnable: 0
+  hp: 30
   moveSpeed: 0.15
   moveDirection: 0
   gravityForce: 1000
@@ -180,4 +182,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafd59d77feee474e8660893062d2048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveStartTime: 2
   popPosition: {x: 298, y: -6, z: 0}
