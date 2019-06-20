@@ -142,11 +142,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d04b6d666dc94dc7b74faad5e6670a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletDamageEnable: 1
+  StepDamageEnable: 1
   moveEnable: 0
   hp: 1
   moveSpeed: 0.1
   moveDirection: 0
-  gravityForce: 0.001
+  gravityForce: 0.01
   playerBoundForce: 2000
 --- !u!95 &5640182893557299875
 Animator:

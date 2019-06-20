@@ -148,7 +148,7 @@ MonoBehaviour:
   hp: 1
   moveSpeed: 0.1
   moveDirection: 0
-  gravityForce: 0.001
+  gravityForce: 0.01
   playerBoundForce: 0
 --- !u!95 &3377296057141615978
 Animator:
