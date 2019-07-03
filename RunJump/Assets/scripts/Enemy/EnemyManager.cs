@@ -9,6 +9,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour {
 
     private Rigidbody2D body; // このスクリプトが適用されているRigidbody
+    private GameObject clearManager = null;
 
     [Header ("弾による攻撃でダメージが与えられるかどうか")]
     [SerializeField] private bool bulletDamageEnable = true;
@@ -18,6 +19,7 @@ public class EnemyManager : MonoBehaviour {
 
     private void Start () {
         body = GetComponent<Rigidbody2D> ();
+        clearManager = GameObject.Find ("ClearManager");
     }
     private void Update () {
         this.HpUpdata (); // 死亡判定
@@ -45,6 +47,13 @@ public class EnemyManager : MonoBehaviour {
     [SerializeField] private int hp = 1; // 攻撃を耐える回数
     private void HpUpdata () {
         if (hp <= 0) {
+            if (this.gameObject.tag == "Boss") {
+                if (clearManager != null) {
+                    clearManager.GetComponent<ClearManager> ().SetBossDied ();
+                } else {
+                    Debug.Log ("ClearManagerがこのシーンに存在しません");
+                }
+            }
             Destroy (this.gameObject); // 体力が0以下になったら消滅
         }
     }

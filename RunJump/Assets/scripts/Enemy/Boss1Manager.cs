@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss1Manager : MonoBehaviour {
-
     [Header ("出現から移動開始までの時間")]
     [SerializeField] private float moveStartTime = 2.0f;
     private void OnBecameVisible () {
