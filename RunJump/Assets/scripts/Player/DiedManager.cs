@@ -34,8 +34,12 @@ public class DiedManager : MonoBehaviour {
     [SerializeField] private float GameOverTextOffsetX = 0.5f;
     [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(Y方向)")]
     [SerializeField] private float GameOverTextOffsetY = 0.5f;
+    private bool isQuit = false; // アプリケーションを終了した際にtrueにする
+    private void OnApplicationQuit () {
+        isQuit = true;
+    }
     private void ShowGameOverText () {
-        if (cameraObject != null) {
+        if (cameraObject != null && !isQuit) {
             if (GameOverTextObject != null) {
                 Instantiate (
                     GameOverTextObject, // 生成するPrefab

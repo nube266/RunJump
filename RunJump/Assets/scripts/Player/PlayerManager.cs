@@ -166,14 +166,12 @@ public class PlayerManager : MonoBehaviour {
 
     //---------------------死亡処理(先頭)---------------------//
 
-    private void DiedProcess () { // 画面外に出た場合死亡
+    private void DiedProcess () {
         if (isLife == true && cameraObject != null) { //カメラがあるならばカメラを停止
             cameraObject.GetComponent<CameraManager> ().CameraStop ();
         }
         if (diedManager != null) {
             diedManager.GetComponent<DiedManager> ().SetPlayerDied ();
-        } else {
-            Debug.Log ("DiedManagerがこのシーンに存在しません");
         }
         Destroy (this.gameObject);
     }
