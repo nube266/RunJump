@@ -53,8 +53,6 @@ public class DiedManager : MonoBehaviour {
             } else {
                 Debug.Log ("死亡時のテキストが設定されていません");
             }
-        } else {
-            Debug.Log ("カメラが指定されていません");
         }
     }
     //---------------------Game Over時のテキスト表示(末尾)---------------------//

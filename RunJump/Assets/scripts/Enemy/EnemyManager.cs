@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour {
         this.HpUpdata (); // 死亡判定
         this.MoveUpdata (); // 移動処理
         this.GravityUpdata (); // 重力処理
+        this.moveUpDown (); // 上下動
     }
 
     //---------------------移動開始判定(先頭)---------------------//
@@ -123,4 +124,21 @@ public class EnemyManager : MonoBehaviour {
         return this.StepDamageEnable;
     }
     //-------------踏むことででダメージを与えられるかどうかを返す(末尾)-------------//
+
+    //-------------上下動(先頭)-------------//
+    [Header ("上下動をするかどうか")]
+    [SerializeField] private bool moveUpDownEnable = false;
+    [Header ("上下動の振幅")]
+    [SerializeField] private float amplitude = 0.1f;
+    [Header ("上下動のスピード")]
+    [SerializeField] private float moveUpDownSpeed = 0.5f;
+    private void moveUpDown () {
+        if (moveUpDownEnable) {
+            this.transform.position = new Vector3 (
+                this.transform.position.x,
+                this.transform.position.y + moveUpDownSpeed * Mathf.Sin (Time.frameCount * amplitude),
+                this.transform.position.z);
+        }
+    }
+    //-------------上下動(末尾)-------------//
 }
