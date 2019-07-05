@@ -20,12 +20,13 @@ public class EnemyManager : MonoBehaviour {
     private void Start () {
         body = GetComponent<Rigidbody2D> ();
         clearManager = GameObject.Find ("ClearManager");
+        this.MoveUpDownStart ();
     }
     private void Update () {
-        this.HpUpdata (); // 死亡判定
-        this.MoveUpdata (); // 移動処理
-        this.GravityUpdata (); // 重力処理
-        this.moveUpDown (); // 上下動
+        this.HpUpdate (); // 死亡判定
+        this.MoveUpdate (); // 移動処理
+        this.GravityUpdate (); // 重力処理
+        this.MoveUpDownUpdate (); // 上下動
     }
 
     //---------------------移動開始判定(先頭)---------------------//
@@ -46,7 +47,7 @@ public class EnemyManager : MonoBehaviour {
     //---------------------死亡判定(先頭)---------------------//
     [Header ("体力(攻撃を耐える回数)")]
     [SerializeField] private int hp = 1; // 攻撃を耐える回数
-    private void HpUpdata () {
+    private void HpUpdate () {
         if (hp <= 0) {
             if (this.gameObject.tag == "Boss") {
                 if (clearManager != null) {
@@ -65,7 +66,7 @@ public class EnemyManager : MonoBehaviour {
     [SerializeField] private float moveSpeed = 0.1f; // 移動速度
     [Header ("移動方向(チェックを入れると右、入れていない場合左)")]
     [SerializeField] private bool moveDirection = false; // 移動方向(チェックを入れると右、入れていない場合左)
-    private void MoveUpdata () {
+    private void MoveUpdate () {
         if (moveStartFlag == true) {
             if (moveDirection == true) {
                 this.transform.Translate (new Vector2 (moveSpeed, 0));
@@ -80,7 +81,7 @@ public class EnemyManager : MonoBehaviour {
     //---------------------重力処理(先頭)---------------------//
     [Header ("重力の強さ")]
     [SerializeField] private float gravityForce = 0.001f; //重力の強さ
-    private void GravityUpdata () {
+    private void GravityUpdate () {
         body.AddForce (Vector3.down * gravityForce);
     }
     //---------------------重力処理(末尾)---------------------//
@@ -129,16 +130,26 @@ public class EnemyManager : MonoBehaviour {
     [Header ("上下動をするかどうか")]
     [SerializeField] private bool moveUpDownEnable = false;
     [Header ("上下動の振幅")]
-    [SerializeField] private float amplitude = 0.1f;
+    [SerializeField] private float amplitude = 0.01f;
     [Header ("上下動のスピード")]
     [SerializeField] private float moveUpDownSpeed = 0.5f;
-    private void moveUpDown () {
+    private float moveStartTime = 0.0f;
+    private void MoveUpDownStart () {
+        if (moveUpDownEnable) {
+            moveStartTime = Time.frameCount;
+        }
+    }
+    private void MoveUpDownUpdate () {
         if (moveUpDownEnable) {
             this.transform.position = new Vector3 (
                 this.transform.position.x,
-                this.transform.position.y + moveUpDownSpeed * Mathf.Sin (Time.frameCount * amplitude),
+                this.transform.position.y + moveUpDownSpeed * Mathf.Sin ((Time.frameCount - moveStartTime) * amplitude),
                 this.transform.position.z);
         }
+    }
+    public void SetMoveUpDownEnable () {
+        this.moveUpDownEnable = true;
+        this.MoveUpDownStart ();
     }
     //-------------上下動(末尾)-------------//
 }

@@ -151,7 +151,7 @@ MonoBehaviour:
   moveDirection: 0
   gravityForce: 0
   playerBoundForce: 2000
-  moveUpDownEnable: 1
+  moveUpDownEnable: 0
   amplitude: 0.1
   moveUpDownSpeed: 0.5
 --- !u!95 &2993641558298574507
@@ -185,3 +185,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49d616d8a9864af280ff248b684059d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveStartTime: 2
