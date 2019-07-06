@@ -31,16 +31,16 @@ public class PlayerManager : MonoBehaviour {
 
     // プレイヤーの更新
     private void Update () {
-        this.NotBossUpdata (); // ボス戦の判定
-        this.ChangeGroundUpdata (); // 接地の状態の変更
-        this.JumpUpdata (); // ジャンプ入力受付
-        this.WallHitUpadata (); // 横に壁があるかの判定
-        this.EnemyHitUpdata (); // 敵との当たり判定
-        this.TreadOnEnemyUpdata (); // 敵を踏んだ時の判定
-        this.GravityUpdata (); // 重力処理
-        this.MoveUpdata (); // 横移動
-        this.DamageUpdata (); // ダメージ処理
-        this.LifeUpdata (); // ライフの描画処理
+        this.NotBossUpdate (); // ボス戦の判定
+        this.ChangeGroundUpdate (); // 接地の状態の変更
+        this.JumpUpdate (); // ジャンプ入力受付
+        this.WallHitUpadate (); // 横に壁があるかの判定
+        this.EnemyHitUpdate (); // 敵との当たり判定
+        this.TreadOnEnemyUpdate (); // 敵を踏んだ時の判定
+        this.GravityUpdate (); // 重力処理
+        this.MoveUpdate (); // 横移動
+        this.DamageUpdate (); // ダメージ処理
+        this.LifeUpdate (); // ライフの描画処理
     }
 
     //---------------------ボス戦に到達したかどうかの判定(先頭)---------------------//
@@ -53,7 +53,7 @@ public class PlayerManager : MonoBehaviour {
             Debug.Log ("ゴールラインが存在しません");
         }
     }
-    private void NotBossUpdata () {
+    private void NotBossUpdate () {
         if (goalLineX > this.transform.position.x) {
             moveRightEnable = true;
         } else {
@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private LayerMask mapLayerMask = 0; //Rayと衝突するマスク
     [Header ("壁判定(右方向へのRayの長さ)")]
     [SerializeField] private float wallRayDistance = 1.0f;
-    private void WallHitUpadata () {
+    private void WallHitUpadate () {
         Ray rightRay = new Ray (this.transform.position, this.transform.right); //右方向へのRay
         RaycastHit2D rightHit = Physics2D.Raycast (
             origin: (Vector2) rightRay.origin,
@@ -88,7 +88,7 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float enemyRayDistance = 1.0f;
     [Header ("横方向の当たり判定の大きさ(右方向へのRayの太さ)")]
     [SerializeField] private Vector2 enemyRaySize = new Vector2 (0.5f, 0.5f);
-    private void EnemyHitUpdata () {
+    private void EnemyHitUpdate () {
         Ray rightRay = new Ray (this.transform.position, Vector2.right); //右方向へのRay
         RaycastHit2D rightHit = Physics2D.BoxCast (
             origin: (Vector2) rightRay.origin,
@@ -111,7 +111,7 @@ public class PlayerManager : MonoBehaviour {
     [Header ("下方向の当たり判定の大きさ(下方向へのRayの太さ)")]
     [SerializeField] private Vector2 treadOnEnemyRaySize = new Vector2 (0.5f, 0.5f);
     private Collider2D lastEnemy; // 最後に踏んだ敵
-    private void TreadOnEnemyUpdata () {
+    private void TreadOnEnemyUpdate () {
         Ray downRay = new Ray (this.transform.position, Vector2.down);
         RaycastHit2D downHit = Physics2D.BoxCast (
             origin: (Vector2) downRay.origin,
@@ -148,7 +148,7 @@ public class PlayerManager : MonoBehaviour {
     [Header ("ジャンプ中かどうか判定するための閾値(小さいほど判定が甘くなる)")]
     [SerializeField] private float jumpThreshold = 100f; // ジャンプ中か判定するための閾値
     private bool isGround = false; //接地判定フラグ
-    private void ChangeGroundUpdata () {
+    private void ChangeGroundUpdate () {
         // 接地しているかどうかの判定
         if (Mathf.Abs (body.velocity.y) > jumpThreshold) { //上下の方向における速度が閾値を超えている場合
             isGround = false;
@@ -182,7 +182,7 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float jumpForce = 2000f; // ジャンプする高さ
     [Header ("ジャンプする高さ(初動)")]
     [SerializeField] private float firstJumpForce = 0.5f; // ジャンプする高さ(初動)
-    private void JumpUpdata () {
+    private void JumpUpdate () {
         if (isGround) {
             if (Input.GetKeyDown (KeyCode.Space)) {
                 this.transform.Translate (0, firstJumpForce, 0);
@@ -206,7 +206,7 @@ public class PlayerManager : MonoBehaviour {
     //---------------------重力処理(先頭)---------------------//
     [Header ("重力の強さ")]
     [SerializeField] private float gravityForce = 100f; //重力の強さ
-    private void GravityUpdata () {
+    private void GravityUpdate () {
         body.AddForce (Vector3.down * gravityForce);
     }
     //---------------------重力処理(末尾)---------------------//
@@ -217,7 +217,7 @@ public class PlayerManager : MonoBehaviour {
     [Header ("デバックモード(チェックをつけるとキー入力で移動可)")]
     [SerializeField] private bool debugMove = false; //デバックモードフラグ
     private bool moveRightEnable = true; //横に移動できる状態ならばtrue,そうでないならばfalse
-    private void MoveUpdata () {
+    private void MoveUpdate () {
         if (moveRightEnable == true && debugMove == false) {
             this.transform.Translate (new Vector2 (moveSpeed, 0));
         }
@@ -239,7 +239,7 @@ public class PlayerManager : MonoBehaviour {
     [Header ("ダメージを受けた際の無敵時間")]
     [SerializeField] private float maxInvicibleTime = 2.0f;
     private float invincibleTime = 0.0f; // ダメージを受けてからの経過時間(累積無敵時間)
-    private void DamageUpdata () {
+    private void DamageUpdate () {
         if (isDamage == true && (invincibleTime < maxInvicibleTime)) {
             invincibleTime += Time.deltaTime;
             float level = Mathf.Abs (Mathf.Sin (Time.time * blinkingCycle));
@@ -286,7 +286,7 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    public void LifeUpdata () {
+    public void LifeUpdate () {
         if (isLife == true) {
             for (int i = 0; i < playerLife; i++) {
                 lifeObject[i].transform.position = new Vector3 (
@@ -299,15 +299,22 @@ public class PlayerManager : MonoBehaviour {
     }
 
     // ライフ変更処理
-    private void ChangeLife (int changeLife) { // 引数:ライフの変更値
-        playerLife += changeLife;
-        foreach (var obj in lifeObject) {
-            Destroy (obj);
+    public void ChangeLife (int changeLife) { // 引数:ライフの変更値
+        if (isDamage == false) {
+            isDamage = true;
+            playerLife += changeLife;
+            foreach (var obj in lifeObject) {
+                Destroy (obj);
+            }
+            if (playerLife == 0) {
+                this.DiedProcess ();
+            }
+            LifeStart (); // 体力の初期化
         }
-        if (playerLife == 0) {
-            this.DiedProcess ();
-        }
-        LifeStart (); // 体力の初期化
     }
     //---------------------ライフの描画処理(末尾)---------------------//
+
+    public bool GetIsDamage () {
+        return isDamage;
+    }
 }

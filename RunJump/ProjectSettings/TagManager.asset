@@ -11,6 +11,8 @@ TagManager:
   - CanBreakGround
   - Boss
   - Mob
+  - EnemyBullet
+  - Bullet
   layers:
   - Default
   - TransparentFX
