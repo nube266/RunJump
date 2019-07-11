@@ -47,6 +47,9 @@ TagManager:
   - Player
   - InvinciblePlayer
   m_SortingLayers:
+  - name: background
+    uniqueID: 2280978511
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
