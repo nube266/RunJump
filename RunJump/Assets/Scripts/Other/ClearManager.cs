@@ -16,7 +16,7 @@ public class ClearManager : MonoBehaviour {
     // Update is called once per frame
     private void Update () {
         if (BossDiedFlag == true) {
-            if (Input.GetKeyDown (KeyCode.Space)) {
+            if (Input.GetKeyDown (KeyCode.S)) {
                 SceneManager.LoadScene (nextStageName);
             }
         }

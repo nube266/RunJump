@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour {
     void Update () {
-        if (Input.GetKeyDown (KeyCode.Space)) {
+        if (Input.GetKeyDown (KeyCode.S)) {
             SceneManager.LoadScene ("stage1"); //選択画面に移動
         }
     }
