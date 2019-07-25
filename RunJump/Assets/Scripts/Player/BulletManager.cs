@@ -6,6 +6,8 @@ public class BulletManager : MonoBehaviour {
 
     [Header ("弾の移動速度")]
     [SerializeField] private float moveSpeed = 0.5f; //弾の移動速度
+    [Header ("斬撃アニメ")]
+    [SerializeField] private GameObject blade;
     private void Update () {
         this.transform.Translate (new Vector2 (moveSpeed, 0));
     }
@@ -21,6 +23,7 @@ public class BulletManager : MonoBehaviour {
         }
         if (layerName == "Enemy") { // 敵と衝突した場合
             Destroy (this.gameObject); // 弾を消滅
+            Instantiate(blade,transform.position,transform.rotation);
             EnemyManager manager = other.GetComponent<EnemyManager> ();
             if (manager != null) {
                 if (manager.GetBulletDamageEnable ()) {

@@ -11,10 +11,15 @@ public class PlayerManager : MonoBehaviour {
     private Rigidbody2D body; // このスクリプトが適用されているRigidbody
     private GameObject cameraObject = null; // カメラのゲームオブジェクト
     private GameObject diedManager = null; // 死亡時の処理
+    private AudioSource audioSource; //効果音用
     [Header ("通常状態のレイヤー暗号")]
     [SerializeField] private int normalPlayerLayerNumber = 30;
     [Header ("無敵状態のレイヤー番号")]
     [SerializeField] private int invinciblePlayerLayerNumber = 31;
+    [Header ("踏んだ時の効果音")]
+    [SerializeField] private AudioClip damageAudio;
+    [Header ("攻撃が弾かれたの効果音")]
+    [SerializeField] private AudioClip metalAudio;
 
     // プレイヤーの初期化
     private void Awake () {
@@ -23,6 +28,7 @@ public class PlayerManager : MonoBehaviour {
         this.LifeStart (); // ライフの描画処理(初期化)
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
         diedManager = GameObject.Find ("DiedManager");
+        audioSource = GetComponent<AudioSource>();
         this.gameObject.layer = normalPlayerLayerNumber;
         if (debugMove == true) {
             cameraObject.GetComponent<CameraManager> ().SetDebugMoveMode ();
@@ -130,6 +136,9 @@ public class PlayerManager : MonoBehaviour {
                     .GetStepDamageEnable () == true) {
                     lastEnemy.GetComponent<EnemyManager> ().ChangeHp (1);
                 }
+                audioSource.PlayOneShot(damageAudio); //踏んだ音を鳴らす
+            } else {
+                audioSource.PlayOneShot(metalAudio); //弾かれた音を鳴らす
             }
         }
     }
