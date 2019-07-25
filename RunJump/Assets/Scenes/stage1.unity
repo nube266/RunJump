@@ -15834,11 +15834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1673206494, guid: 64dd3059da66f415ca772298cf60f197, type: 3}
       propertyPath: moveSpeed
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1673206499, guid: 64dd3059da66f415ca772298cf60f197, type: 3}
       propertyPath: popPosition.x
-      value: 305
+      value: 310
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64dd3059da66f415ca772298cf60f197, type: 3}

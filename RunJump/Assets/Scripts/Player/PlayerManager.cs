@@ -98,7 +98,6 @@ public class PlayerManager : MonoBehaviour {
             distance : enemyRayDistance,
             layerMask : enemyLayerMask);
         if (rightHit.collider && isDamage == false) {
-            isDamage = true;
             lastEnemy = rightHit.collider;
             this.ChangeLife (-1);
         }
@@ -309,7 +308,7 @@ public class PlayerManager : MonoBehaviour {
             if (playerLife == 0) {
                 this.DiedProcess ();
             }
-            LifeStart (); // 体力の初期化
+            LifeStart (); // 体力の表示
         }
     }
     //---------------------ライフの描画処理(末尾)---------------------//
