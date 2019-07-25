@@ -1547,7 +1547,7 @@ PrefabInstance:
     - target: {fileID: 5292753036011458368, guid: 88588f426e4b6484c8440935ecc9e5d7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -62.29
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 5292753036011458368, guid: 88588f426e4b6484c8440935ecc9e5d7,
         type: 3}
@@ -1912,7 +1912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792099774}
   m_Layer: 0
-  m_Name: Lebel
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
