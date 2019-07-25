@@ -23,10 +23,10 @@ public class BulletManager : MonoBehaviour {
         }
         if (layerName == "Enemy") { // 敵と衝突した場合
             Destroy (this.gameObject); // 弾を消滅
-            Instantiate(blade,transform.position,transform.rotation);
             EnemyManager manager = other.GetComponent<EnemyManager> ();
             if (manager != null) {
                 if (manager.GetBulletDamageEnable ()) {
+                    Instantiate(blade,transform.position,transform.rotation);
                     manager.ChangeHp (1); // 敵に引数の分だけダメージを与える
                 }
             }
