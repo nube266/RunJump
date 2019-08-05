@@ -8,6 +8,8 @@ public class BulletManager : MonoBehaviour {
     [SerializeField] private float moveSpeed = 0.5f; //弾の移動速度
     [Header ("斬撃アニメ")]
     [SerializeField] private GameObject blade;
+    [Header ("弾きアニメ")]
+    [SerializeField] private GameObject shed;
     private void Update () {
         this.transform.Translate (new Vector2 (moveSpeed, 0));
     }
@@ -28,6 +30,8 @@ public class BulletManager : MonoBehaviour {
                 if (manager.GetBulletDamageEnable ()) {
                     Instantiate(blade,transform.position,transform.rotation);
                     manager.ChangeHp (1); // 敵に引数の分だけダメージを与える
+                } else {
+                    Instantiate(shed,transform.position,transform.rotation);
                 }
             }
         }

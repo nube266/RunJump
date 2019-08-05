@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
   blade: {fileID: 4165523501130542151, guid: c6850867e441fdc4e843c1ef4e020f5f, type: 3}
-  metalAudio: {fileID: 8300000, guid: 11874423697088244afbf1d6b1ab03de, type: 3}
+  shed: {fileID: 6443641596060140165, guid: ca98d7ca829e3b74a97c59cdaafd2537, type: 3}
 --- !u!61 &3428667327248441245
 BoxCollider2D:
   m_ObjectHideFlags: 0
