@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1033798315385868744}
   - component: {fileID: 6051615080284457878}
   m_Layer: 0
-  m_Name: bladeAnime_0
+  m_Name: bladeAnime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
