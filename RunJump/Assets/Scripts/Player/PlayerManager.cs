@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour {
         this.LifeStart (); // ライフの描画処理(初期化)
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
         diedManager = GameObject.Find ("DiedManager");
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource> ();
         this.gameObject.layer = normalPlayerLayerNumber;
         if (debugMove == true) {
             cameraObject.GetComponent<CameraManager> ().SetDebugMoveMode ();
@@ -105,6 +105,7 @@ public class PlayerManager : MonoBehaviour {
             layerMask : enemyLayerMask);
         if (rightHit.collider && isDamage == false) {
             lastEnemy = rightHit.collider;
+            StartCoroutine ("DeleteLastEnemy");
             this.ChangeLife (-1);
         }
     }
@@ -134,11 +135,11 @@ public class PlayerManager : MonoBehaviour {
                 StartCoroutine ("DeleteLastEnemy");
                 if (lastEnemy.GetComponent<EnemyManager> ()
                     .GetStepDamageEnable () == true) {
-                    lastEnemy.GetComponent<EnemyManager> ().ChangeHp (1);
+                    lastEnemy.GetComponent<EnemyManager> ().ChangeHp (4);
                 }
-                audioSource.PlayOneShot(damageAudio); //踏んだ音を鳴らす
+                audioSource.PlayOneShot (damageAudio); //踏んだ音を鳴らす
             } else {
-                audioSource.PlayOneShot(metalAudio); //弾かれた音を鳴らす
+                audioSource.PlayOneShot (metalAudio); //弾かれた音を鳴らす
             }
         }
     }
