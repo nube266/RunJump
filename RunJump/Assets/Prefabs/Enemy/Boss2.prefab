@@ -152,7 +152,7 @@ MonoBehaviour:
   bulletDamageEnable: 1
   StepDamageEnable: 1
   moveEnable: 0
-  hp: 50
+  hp: 30
   moveSpeed: 0.1
   moveDirection: 0
   gravityForce: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49d616d8a9864af280ff248b684059d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startOffsetX: 4
   bulletPrefab: {fileID: 1038999731830030, guid: 36992be4e7b2c48aba309d25b32a523d,
     type: 3}
   offsetX: -1.5

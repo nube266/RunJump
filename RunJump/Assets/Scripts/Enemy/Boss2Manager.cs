@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Boss2Manager : MonoBehaviour {
 
+    [Header ("ボスの初期位置のx方向へのオフセット")]
+    [SerializeField] private float startOffsetX = 4.0f;
+    private void Start () {
+        GameObject goalLine = GameObject.Find ("GoalLine");
+        float goalLineX = goalLine.transform.position.x;
+        this.gameObject.transform.position = new Vector3 (
+            goalLineX + startOffsetX,
+            this.transform.position.y,
+            this.transform.position.z
+        );
+    }
+
     private void Update () {
         if (enemyShotEnable) StartCoroutine ("EnemyShot"); // ブレス攻撃
     }
