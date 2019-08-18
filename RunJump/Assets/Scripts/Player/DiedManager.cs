@@ -6,9 +6,14 @@ using UnityEngine.SceneManagement;
 public class DiedManager : MonoBehaviour {
     private bool playerDiedFlag = false; // プレイヤーが死んでいるならばtrue
     private GameObject cameraObject = null; // メインカメラのオブジェクト
+    
+    [Header ("決定音")]
+    [SerializeField] private AudioClip decisionAudio;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start () {
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -16,6 +21,7 @@ public class DiedManager : MonoBehaviour {
         if (playerDiedFlag == true) {
             if (Input.GetKeyDown (KeyCode.Space)) {
                 SceneManager.LoadScene ("title"); //選択画面に移動
+                audioSource.PlayOneShot(decisionAudio);
             }
         }
     }

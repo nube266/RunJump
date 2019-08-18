@@ -8,9 +8,14 @@ public class ClearManager : MonoBehaviour {
     [SerializeField] private string nextStageName = "title";
     private bool BossDiedFlag = false; // ボスが死んでいるならばtrue
     private GameObject cameraObject = null; // メインカメラのオブジェクト
+    
+    [Header ("決定音")]
+    [SerializeField] private AudioClip decisionAudio;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start () {
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -18,6 +23,7 @@ public class ClearManager : MonoBehaviour {
         if (BossDiedFlag == true) {
             if (Input.GetKeyDown (KeyCode.S)) {
                 SceneManager.LoadScene (nextStageName);
+                audioSource.PlayOneShot(decisionAudio);
             }
         }
     }

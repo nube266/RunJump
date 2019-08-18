@@ -2153,6 +2153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStageName: Stage3
+  decisionAudio: {fileID: 8300000, guid: a57d38363f256c94696173fc30f1fbc2, type: 3}
   GameClearTextObject: {fileID: 8568106119956271172, guid: 1fe867945c34d419e8df7941842a5db1,
     type: 3}
   GameClearTextOffsetX: 0.5
