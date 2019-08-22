@@ -2156,6 +2156,12 @@ MonoBehaviour:
   decisionAudio: {fileID: 8300000, guid: a57d38363f256c94696173fc30f1fbc2, type: 3}
   GameClearTextObject: {fileID: 8568106119956271172, guid: 1fe867945c34d419e8df7941842a5db1,
     type: 3}
+  PressTextObject: {fileID: 4330772047800355705, guid: 8788fd7f68f0a4e3b8d8f5ff7e375eba,
+    type: 3}
+  STextObject: {fileID: 4154679271035571338, guid: 44bf5628e73b0430d9bbae680d35228e,
+    type: 3}
+  KeyTextObject: {fileID: 3107433603927240321, guid: 4d2cef63461084e409324d437346ac36,
+    type: 3}
   GameClearTextOffsetX: 0.5
   GameClearTextOffsetY: 0.5
 --- !u!1 &1281568618

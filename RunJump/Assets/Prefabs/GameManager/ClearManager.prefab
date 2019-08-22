@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3223299487253744769
+--- !u!1 &285104717
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6373631495084606283}
-  - component: {fileID: 2206938334722640041}
-  - component: {fileID: 2432801516378161763}
+  - component: {fileID: 3966652121728558019}
+  - component: {fileID: 3623300610642121330}
+  - component: {fileID: 285104718}
   m_Layer: 0
-  m_Name: DiedManager
+  m_Name: ClearManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6373631495084606283
+--- !u!4 &3966652121728558019
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223299487253744769}
+  m_GameObject: {fileID: 285104717}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -60, y: -4.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,36 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2206938334722640041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223299487253744769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b880d46c4ed4d2992e5bfb79f6746c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  decisionAudio: {fileID: 8300000, guid: a57d38363f256c94696173fc30f1fbc2, type: 3}
-  GameOverTextObject: {fileID: 6810152160645391958, guid: df477f3e4bc4541a396c59b8c1d26a28,
-    type: 3}
-  PressTextObject: {fileID: 4330772047800355705, guid: 8788fd7f68f0a4e3b8d8f5ff7e375eba,
-    type: 3}
-  STextObject: {fileID: 4154679271035571338, guid: 44bf5628e73b0430d9bbae680d35228e,
-    type: 3}
-  KeyTextObject: {fileID: 3107433603927240321, guid: 4d2cef63461084e409324d437346ac36,
-    type: 3}
-  GameOverTextOffsetX: 0.5
-  GameOverTextOffsetY: 0.5
---- !u!82 &2432801516378161763
+--- !u!82 &3623300610642121330
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223299487253744769}
+  m_GameObject: {fileID: 285104717}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -151,3 +128,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &285104718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285104717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd03b9b32be44f10bffcf2e0a57677c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextStageName: Stage2
+  decisionAudio: {fileID: 8300000, guid: a57d38363f256c94696173fc30f1fbc2, type: 3}
+  GameClearTextObject: {fileID: 8568106119956271172, guid: 1fe867945c34d419e8df7941842a5db1,
+    type: 3}
+  PressTextObject: {fileID: 4330772047800355705, guid: 8788fd7f68f0a4e3b8d8f5ff7e375eba,
+    type: 3}
+  STextObject: {fileID: 4154679271035571338, guid: 44bf5628e73b0430d9bbae680d35228e,
+    type: 3}
+  KeyTextObject: {fileID: 3107433603927240321, guid: 4d2cef63461084e409324d437346ac36,
+    type: 3}
+  GameClearTextOffsetX: 0.5
+  GameClearTextOffsetY: 0.5
