@@ -6,22 +6,22 @@ using UnityEngine.SceneManagement;
 public class DiedManager : MonoBehaviour {
     private bool playerDiedFlag = false; // プレイヤーが死んでいるならばtrue
     private GameObject cameraObject = null; // メインカメラのオブジェクト
-    
+
     [Header ("決定音")]
     [SerializeField] private AudioClip decisionAudio;
     AudioSource audioSource;
     // Start is called before the first frame update
     void Start () {
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame
     private void Update () {
         if (playerDiedFlag == true) {
-            if (Input.GetKeyDown (KeyCode.Space)) {
+            if (Input.GetKeyDown (KeyCode.S)) {
                 SceneManager.LoadScene ("title"); //選択画面に移動
-                audioSource.PlayOneShot(decisionAudio);
+                audioSource.PlayOneShot (decisionAudio);
             }
         }
     }
@@ -36,6 +36,9 @@ public class DiedManager : MonoBehaviour {
     //---------------------Game Over時のテキスト表示(先頭)---------------------//
     [Header ("GAME OVER時に表示されるテキスト")]
     [SerializeField] private GameObject GameOverTextObject = null;
+    [SerializeField] private GameObject PressTextObject = null;
+    [SerializeField] private GameObject STextObject = null;
+    [SerializeField] private GameObject KeyTextObject = null;
     [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(X方向)")]
     [SerializeField] private float GameOverTextOffsetX = 0.5f;
     [Header ("GAME OVER時に表示されるテキストの位置に関するオフセット(Y方向)")]
@@ -52,6 +55,33 @@ public class DiedManager : MonoBehaviour {
                     new Vector3 (
                         cameraObject.transform.position.x + GameOverTextOffsetX,
                         cameraObject.transform.position.y + GameOverTextOffsetY,
+                        this.transform.position.z
+                    ), // 位置
+                    Quaternion.identity
+                ); // 角度
+                Instantiate (
+                    PressTextObject, // 生成するPrefab
+                    new Vector3 (
+                        cameraObject.transform.position.x + GameOverTextOffsetX - 2.0f,
+                        cameraObject.transform.position.y + GameOverTextOffsetY - 2.0f,
+                        this.transform.position.z
+                    ), // 位置
+                    Quaternion.identity
+                ); // 角度
+                Instantiate (
+                    STextObject, // 生成するPrefab
+                    new Vector3 (
+                        cameraObject.transform.position.x + GameOverTextOffsetX + 0.5f,
+                        cameraObject.transform.position.y + GameOverTextOffsetY - 2.0f,
+                        this.transform.position.z
+                    ), // 位置
+                    Quaternion.identity
+                ); // 角度
+                Instantiate (
+                    KeyTextObject, // 生成するPrefab
+                    new Vector3 (
+                        cameraObject.transform.position.x + GameOverTextOffsetX + 2.5f,
+                        cameraObject.transform.position.y + GameOverTextOffsetY - 2.0f,
                         this.transform.position.z
                     ), // 位置
                     Quaternion.identity
