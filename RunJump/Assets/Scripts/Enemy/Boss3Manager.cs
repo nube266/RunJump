@@ -46,7 +46,7 @@ public class Boss3Manager : MonoBehaviour {
         enemyActionEnable = false;
         yield return new WaitForSeconds (waitTime);
         if (actionCount == 5) {
-            switch (random.Next (5)) {
+            switch (random.Next (3)) {
                 case 0:
                     actionPattern = "A";
                     break;
@@ -56,36 +56,18 @@ public class Boss3Manager : MonoBehaviour {
                 case 2:
                     actionPattern = "C";
                     break;
-                case 3:
-                    actionPattern = "D";
-                    break;
-                case 4:
-                    actionPattern = "E";
-                    break;
             }
             actionCount = 0;
         }
-        actionPattern = "A";
         switch (actionPattern) {
             case "A":
                 this.ActionA ();
-                Debug.Log ("A");
                 break;
             case "B":
                 this.ActionB ();
-                Debug.Log ("B");
                 break;
             case "C":
                 this.ActionC ();
-                Debug.Log ("C");
-                break;
-            case "D":
-                this.ActionD ();
-                Debug.Log ("D");
-                break;
-            case "E":
-                this.ActionE ();
-                Debug.Log ("E");
                 break;
         }
         actionCount++;
@@ -114,14 +96,19 @@ public class Boss3Manager : MonoBehaviour {
     private void ActionB () {
         switch (actionCount) {
             case 0:
+                this.EnemyPop1 ();
                 break;
             case 1:
+                this.EnemyPop1 ();
                 break;
             case 2:
+                this.Tackle ();
                 break;
             case 3:
+                this.EnemyShot1 ();
                 break;
             case 4:
+                this.EnemyShot1 ();
                 break;
         }
     }
@@ -129,44 +116,19 @@ public class Boss3Manager : MonoBehaviour {
     private void ActionC () {
         switch (actionCount) {
             case 0:
+                this.EnemyPopAndShot1 ();
                 break;
             case 1:
+                this.EnemyPopAndShot1 ();
                 break;
             case 2:
+                this.EnemyPop2 ();
                 break;
             case 3:
+                this.Tackle ();
                 break;
             case 4:
-                break;
-        }
-    }
-
-    private void ActionD () {
-        switch (actionCount) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
-    }
-
-    private void ActionE () {
-        switch (actionCount) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
+                this.EnemyPop1 ();
                 break;
         }
     }
@@ -318,6 +280,29 @@ public class Boss3Manager : MonoBehaviour {
         Instantiate (
             mobPrefab4, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX - 3.0f, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+    }
+
+    private void EnemyPopAndShot1 () {
+        Instantiate (
+            bulletPrefab1, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX - 2.0f, initial_pos_y + offsetY, 0.0f), // 位置
+            new Quaternion (0.0f, 90.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            bulletPrefab2, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX - 2.0f, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 90.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            bulletPrefab1, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY, 0.0f), // 位置
+            new Quaternion (0.0f, 90.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            bulletPrefab2, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 90.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX - 2.0f, initial_pos_y + offsetY + 2.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
     }
 
