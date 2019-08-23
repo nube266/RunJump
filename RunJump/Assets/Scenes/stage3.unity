@@ -1600,11 +1600,26 @@ PrefabInstance:
     - target: {fileID: 1011211629031248755, guid: 0ed99a335bdb793468fbec45c1535106,
         type: 3}
       propertyPath: waitTime
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1011211629031248755, guid: 0ed99a335bdb793468fbec45c1535106,
         type: 3}
       propertyPath: moveStartTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992287127751319200, guid: 0ed99a335bdb793468fbec45c1535106,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992287127751319200, guid: 0ed99a335bdb793468fbec45c1535106,
+        type: 3}
+      propertyPath: bulletDamageEnable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992287127751319200, guid: 0ed99a335bdb793468fbec45c1535106,
+        type: 3}
+      propertyPath: StepDamageEnable
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
