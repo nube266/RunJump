@@ -11,6 +11,9 @@ public class DiedManager : MonoBehaviour {
     [Header ("決定音")]
     [SerializeField] private AudioClip decisionAudio;
     AudioSource audioSource;
+
+    private string stageName = "stage1";
+
     // Start is called before the first frame update
     void Start () {
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
@@ -22,6 +25,8 @@ public class DiedManager : MonoBehaviour {
     private void Update () {
         if (playerDiedFlag == true) {
             if (Input.GetKeyDown (KeyCode.S)) {
+                stageName = SceneManager.GetActiveScene ().name;
+                DontDestroyOnLoad (this);
                 SceneManager.LoadScene ("title"); //選択画面に移動
                 audioSource.PlayOneShot (decisionAudio);
             }
@@ -96,4 +101,8 @@ public class DiedManager : MonoBehaviour {
         }
     }
     //---------------------Game Over時のテキスト表示(末尾)---------------------//
+
+    public string getStageName () {
+        return stageName;
+    }
 }

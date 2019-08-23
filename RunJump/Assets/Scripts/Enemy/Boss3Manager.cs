@@ -96,7 +96,7 @@ public class Boss3Manager : MonoBehaviour {
     private void ActionB () {
         switch (actionCount) {
             case 0:
-                this.EnemyPop1 ();
+                this.EnemyPop2 ();
                 break;
             case 1:
                 this.EnemyPop1 ();
@@ -108,7 +108,7 @@ public class Boss3Manager : MonoBehaviour {
                 this.EnemyShot1 ();
                 break;
             case 4:
-                this.EnemyShot1 ();
+                this.EnemyPop1 ();
                 break;
         }
     }
