@@ -314,6 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextStageName: Stage2
   decisionAudio: {fileID: 8300000, guid: a57d38363f256c94696173fc30f1fbc2, type: 3}
+  clearAudio: {fileID: 8300000, guid: 9a32dea1b3d4155499bb9e1d8238e735, type: 3}
+  BGMOb: {fileID: 2000996203}
   GameClearTextObject: {fileID: 8568106119956271172, guid: 1fe867945c34d419e8df7941842a5db1,
     type: 3}
   PressTextObject: {fileID: 4330772047800355705, guid: 8788fd7f68f0a4e3b8d8f5ff7e375eba,
@@ -15992,6 +15994,12 @@ PrefabInstance:
       objectReference: {fileID: 1828171249}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5f8fc06f70884856a5ce5057fbe455f, type: 3}
+--- !u!1 &2000996203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 453295633257347552, guid: 713d6f47d360f2a4aaf7bf0b60e4c41e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1465054233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2019929662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4760578568528512021, guid: 003d114962a154233a278b10405dae6e,

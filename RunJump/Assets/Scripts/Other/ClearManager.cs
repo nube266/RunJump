@@ -11,6 +11,10 @@ public class ClearManager : MonoBehaviour {
 
     [Header ("決定音")]
     [SerializeField] private AudioClip decisionAudio;
+    [Header ("クリアジングル")]
+    [SerializeField] private AudioClip clearAudio;
+    [Header ("BGMのオブジェクト")]
+    [SerializeField] private GameObject BGMOb;
     AudioSource audioSource;
     // Start is called before the first frame update
     void Start () {
@@ -35,6 +39,8 @@ public class ClearManager : MonoBehaviour {
     //---------------------死亡時のフラグ処理(先頭)---------------------//
     public void SetBossDied () {
         BossDiedFlag = true;
+        audioSource.PlayOneShot (clearAudio);
+        Destroy(BGMOb);
         this.ShowGameClearText ();
     }
     //---------------------死亡時のフラグ処理(末尾)---------------------//
