@@ -42,6 +42,10 @@ public class EnemyManager : MonoBehaviour {
     public void MoveStart () {
         moveStartFlag = true;
     }
+
+    public void MoveStop () {
+        moveStartFlag = false;
+    }
     //---------------------移動開始判定(末尾)---------------------//
 
     //---------------------死亡判定(先頭)---------------------//

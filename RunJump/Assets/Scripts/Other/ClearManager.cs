@@ -28,6 +28,10 @@ public class ClearManager : MonoBehaviour {
         }
     }
 
+    public bool getBossDiedFlag () {
+        return BossDiedFlag;
+    }
+
     //---------------------死亡時のフラグ処理(先頭)---------------------//
     public void SetBossDied () {
         BossDiedFlag = true;

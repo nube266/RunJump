@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DiedManager : MonoBehaviour {
+    private GameObject clearManager = null;
     private bool playerDiedFlag = false; // プレイヤーが死んでいるならばtrue
     private GameObject cameraObject = null; // メインカメラのオブジェクト
 
@@ -13,6 +14,7 @@ public class DiedManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start () {
         cameraObject = GameObject.FindGameObjectWithTag ("MainCamera");
+        clearManager = GameObject.Find ("ClearManager");
         audioSource = GetComponent<AudioSource> ();
     }
 
@@ -28,8 +30,10 @@ public class DiedManager : MonoBehaviour {
 
     //---------------------死亡時のフラグ処理(先頭)---------------------//
     public void SetPlayerDied () {
-        playerDiedFlag = true;
-        this.ShowGameOverText ();
+        if (clearManager.GetComponent<ClearManager> ().getBossDiedFlag () == false) {
+            playerDiedFlag = true;
+            this.ShowGameOverText ();
+        }
     }
     //---------------------死亡時のフラグ処理(末尾)---------------------//
 

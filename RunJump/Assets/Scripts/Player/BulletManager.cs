@@ -27,11 +27,13 @@ public class BulletManager : MonoBehaviour {
             Destroy (this.gameObject); // 弾を消滅
             EnemyManager manager = other.GetComponent<EnemyManager> ();
             if (manager != null) {
-                if (manager.GetBulletDamageEnable ()) {
-                    Instantiate(blade,transform.position,transform.rotation);
+                if (manager.GetBulletDamageEnable () && blade != null) {
+                    Instantiate (blade, transform.position, transform.rotation);
                     manager.ChangeHp (1); // 敵に引数の分だけダメージを与える
                 } else {
-                    Instantiate(shed,transform.position,transform.rotation);
+                    if (shed != null) {
+                        Instantiate (shed, transform.position, transform.rotation);
+                    }
                 }
             }
         }
