@@ -32,7 +32,7 @@ public class EnemyManager : MonoBehaviour {
     //---------------------移動開始判定(先頭)---------------------//
     [Header ("移動するかどうかのフラグ")]
     [SerializeField] private bool moveEnable = false; // 移動するオブジェクトならばtrue,そうでないならばfalse
-    private bool moveStartFlag = false; // 動き出すまではfalse、動き出したあとはfalse
+    [SerializeField] private bool moveStartFlag = false; // 動き出すまではfalse、動き出したあとはfalse
     private void OnBecameVisible () { // カメラ内に入ったら動き出す
         if (moveEnable == true && this.gameObject != null) { // 移動するオブジェクトならば
             moveStartFlag = true;

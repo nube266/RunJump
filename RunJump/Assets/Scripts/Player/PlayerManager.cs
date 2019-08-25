@@ -55,6 +55,7 @@ public class PlayerManager : MonoBehaviour {
         try {
             GameObject goalLineObject = GameObject.FindGameObjectWithTag ("GoalLine");
             goalLineX = goalLineObject.transform.position.x;
+            Destroy (goalLineObject);
         } catch {
             Debug.Log ("ゴールラインが存在しません");
         }

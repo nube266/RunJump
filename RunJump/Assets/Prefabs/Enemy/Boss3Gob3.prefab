@@ -145,6 +145,7 @@ MonoBehaviour:
   bulletDamageEnable: 0
   StepDamageEnable: 1
   moveEnable: 1
+  moveStartFlag: 1
   hp: 1
   moveSpeed: 0.2
   moveDirection: 0
