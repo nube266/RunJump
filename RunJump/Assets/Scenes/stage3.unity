@@ -1647,6 +1647,12 @@ PrefabInstance:
       propertyPath: moveStartTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1011211629031248755, guid: 0ed99a335bdb793468fbec45c1535106,
+        type: 3}
+      propertyPath: smokePrefab
+      value: 
+      objectReference: {fileID: 1322277724384790627, guid: 957adbc30c52f2646937cde7dec75f9d,
+        type: 3}
     - target: {fileID: 6992287127751319200, guid: 0ed99a335bdb793468fbec45c1535106,
         type: 3}
       propertyPath: moveSpeed
