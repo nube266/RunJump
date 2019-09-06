@@ -15,6 +15,7 @@ public class Boss3Manager : MonoBehaviour {
     [SerializeField] private GameObject mobPrefab2 = null;
     [SerializeField] private GameObject mobPrefab3 = null;
     [SerializeField] private GameObject mobPrefab4 = null;
+    [SerializeField] private GameObject smokePrefab = null;
     private void Start () {
         GameObject goalLine = GameObject.Find ("GoalLine");
         float goalLineX = goalLine.transform.position.x;
@@ -235,7 +236,15 @@ public class Boss3Manager : MonoBehaviour {
             new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
+            smokePrefab, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
             mobPrefab1, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
@@ -243,7 +252,15 @@ public class Boss3Manager : MonoBehaviour {
             new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
+            smokePrefab, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
             mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
@@ -251,7 +268,15 @@ public class Boss3Manager : MonoBehaviour {
             new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY + 4.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
+            smokePrefab, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY + 4.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
             mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY + 4.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY + 4.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
     }
@@ -262,7 +287,15 @@ public class Boss3Manager : MonoBehaviour {
             new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
+            smokePrefab, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
             mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
@@ -270,7 +303,15 @@ public class Boss3Manager : MonoBehaviour {
             new Vector3 (initial_pos_x + offsetX - 3.0f, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
+            smokePrefab, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX - 3.0f, initial_pos_y + offsetY + 1.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
             mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
@@ -278,7 +319,15 @@ public class Boss3Manager : MonoBehaviour {
             new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
+            smokePrefab, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX + 3.0f, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
             mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX - 3.0f, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX - 3.0f, initial_pos_y + offsetY - 2.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
     }
@@ -302,6 +351,10 @@ public class Boss3Manager : MonoBehaviour {
             new Quaternion (0.0f, 90.0f, 0.0f, 1.0f)); // 角度
         Instantiate (
             mobPrefab4, // 生成するPrefab
+            new Vector3 (initial_pos_x + offsetX - 2.0f, initial_pos_y + offsetY + 2.0f, 0.0f), // 位置
+            new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
+        Instantiate (
+            smokePrefab, // 生成するPrefab
             new Vector3 (initial_pos_x + offsetX - 2.0f, initial_pos_y + offsetY + 2.0f, 0.0f), // 位置
             new Quaternion (0.0f, 0.0f, 0.0f, 1.0f)); // 角度
     }
