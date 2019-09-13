@@ -149,9 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d04b6d666dc94dc7b74faad5e6670a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDamageEnable: 1
+  bulletDamageEnable: 0
   StepDamageEnable: 1
   moveEnable: 0
+  moveStartFlag: 0
   hp: 30
   moveSpeed: 0.1
   moveDirection: 0
